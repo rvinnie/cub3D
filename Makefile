@@ -8,6 +8,7 @@ NAME		=	cub3D
 
 SRCS		=	main.c \
 				parser/parser.c \
+				painter/painter.c \
 				gnl/get_next_line_utils.c \
 				gnl/get_next_line.c \
 				libft/lst_funcs.c \
@@ -16,14 +17,23 @@ SRCS		=	main.c \
 
 OBJS		=	$(SRCS:.c=.o)
 
-# %.o: %.c
-#     $(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
+# %.o:%.c
+# 	$(CC) -Wall -Wextra -Werror -I./includes -Imlx_linux -O3 -c $< -o $@
 
-
-$(NAME): $(OBJS)                            
-	$(CC) $(OBJS) $(CFLAGS) -I/usr/include -Lmlx_linux -lmlx_linux -L/usr/lib -Imlx_linux -lXext -lmlx -lX11 -lm -lz -o $(NAME)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L.mlx -lmlx_Linux -lXext -lX11 -lm -lz
 
 all:	$(NAME)
+
+test:
+	$(CC) -c testing/test.c
+	$(CC) -o test test.o -L.mlx -lmlx_Linux -lXext -lX11 -lm -lz
+	$(RM) test.o
+	mv test testing
+	./testing/test
+
+testc:
+	$(RM) test
 
 clean:
 	$(RM) $(OBJS)

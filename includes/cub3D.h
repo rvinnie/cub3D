@@ -1,6 +1,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
-# include "../gnl/get_next_line.h"
+# include "get_next_line.h"
+# include "mlx.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -30,8 +31,10 @@ int			ft_lstsize(t_list *lst);
 void		put_error(int flag);
 
 // Parser functions
-t_map_info parser(char *path, t_map_info s_map_info);
-t_map_info lst_to_arr(t_list *head, t_map_info s_map_info);
+t_map_info	parser(char *path, t_map_info s_map_info);
+t_map_info	lst_to_arr(t_list *head, t_map_info s_map_info);
+// Painter functions
+void		painter(t_map_info s_map_info);
 
 // Testing functions
 void		print_list(t_list *lst); // FOR TESTING
