@@ -9,6 +9,7 @@ NAME		=	cub3D
 SRCS		=	main.c \
 				parser/parser.c \
 				painter/painter.c \
+				painter/paint_map.c \
 				gnl/get_next_line_utils.c \
 				gnl/get_next_line.c \
 				libft/lst_funcs.c \
