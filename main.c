@@ -15,6 +15,6 @@ int main(int argc, char *argv[])
 	// 	i++;
 	// }
 
-	painter(s_map_info);
+	painter(&s_map_info);
 	return (0);
 }

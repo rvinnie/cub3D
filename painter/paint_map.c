@@ -1,26 +1,18 @@
 #include "../includes/cub3D.h"
 
-typedef struct
-{
-	void	*img;
-	char	*addr;
-	int		bit_per_pixel;
-	int		line_len;
-	int		endian;
-}			t_data;
-
 // int     offset = (y * line_length + x * (bits_per_pixel / 8));
 
-void pxl_put(t_data *data, int x, int y, int color)
+void	pxl_put(t_address *data, int x, int y, int color, int pxl_size)
 {
 	char *dst;
-	int i = 0;
-	int j = 0;
+	int i;
+	int j;
 
-	while (i < 10)
+	i = 0;
+	while (i < pxl_size)
 	{
 		j = 0;
-		while (j < 10)
+		while (j < pxl_size)
 		{
 			dst = data->addr + ((y + i) * data->line_len + (x + j) * (data->bit_per_pixel / 8));
 			*(unsigned int*)dst = color;
@@ -30,35 +22,37 @@ void pxl_put(t_data *data, int x, int y, int color)
 	}
 }
 
-void paint_map(t_map_info s_map_info)
+void	map_drawer(t_address img, t_map_info *s_map_info, int pxl_size)
 {
-	void *mlx;
 	int x;
-	int y = 0;
-	int pxl_size = 10;
-	void *win;
-	t_data img;
+	int y;
 
-	char	**arr = s_map_info.map;
-	int		heig = s_map_info.map_height;
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 500, 500, "Hello!");
-	img.img = mlx_new_image(mlx, 500, 500);
-	img.addr = mlx_get_data_addr(img.img, &img.bit_per_pixel, &img.line_len, &img.endian);
-	while (y < heig)
+	y = 0;
+	while (y < s_map_info->map_height)
 	{
 		x = 0;
-		while (x < (int)strlen(arr[y]))
+		while (x < (int)ft_strlen(s_map_info->map[y]))
 		{
-			if (arr[y][x] == '1')
-				pxl_put(&img, x * pxl_size, y * pxl_size, 0x00FF0000);
-			else if (arr[y][x] == '2')
-				pxl_put(&img, x * pxl_size, y * pxl_size, 0x00FF00FF);
+			if (s_map_info->map[y][x] == '1')
+				pxl_put(&img, x * pxl_size, y * pxl_size, WALL_COLOR, pxl_size);
+			else if (s_map_info->map[y][x] == '2')
+				pxl_put(&img, x * pxl_size, y * pxl_size, SPRITE_COLOR, pxl_size);
+			else if (s_map_info->map[y][x] == '0')
+				pxl_put(&img, x * pxl_size, y * pxl_size, FLOOR_COLOR, pxl_size);
 			x++;
 		}
 		y++;
-		
 	}
-	mlx_put_image_to_window(mlx, win, img.img, 0, 0);
-	mlx_loop(mlx);
+}
+
+void	make_map_image(t_map_info *s_map_info)
+{
+	int			pxl_size;
+	t_address	img;
+
+	pxl_size = 10;
+	img.img = mlx_new_image(s_map_info->mlx, 500, 500);
+	img.addr = mlx_get_data_addr(img.img, &img.bit_per_pixel, &img.line_len, &img.endian);
+	map_drawer(img, s_map_info, pxl_size);
+	mlx_put_image_to_window(s_map_info->mlx, s_map_info->win, img.img, 0, 0);
 }
