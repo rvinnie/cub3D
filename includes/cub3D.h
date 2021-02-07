@@ -14,6 +14,9 @@
 # define FLOOR_COLOR 0x00FFFFFF
 # define PLAYER_COLOR 0x00FF0DD3
 # define SPRITE_COLOR 0x002CA838
+# define PLAYER_STEP 5
+# define PXL_SIZE 20
+# define PLAYER_SIZE 10
 
 typedef struct	s_list
 {
@@ -23,20 +26,29 @@ typedef struct	s_list
 
 typedef struct
 {
-	void	*img;
-	char	*addr;
-	int		bit_per_pixel;
-	int		line_len;
-	int		endian;
-}			t_address;
+	void			*img;
+	char			*addr;
+	int				bit_per_pixel;
+	int				line_len;
+	int				endian;
+}					t_img;
+
+typedef struct
+{
+	int				x_pos;
+	int				y_pos;
+}					t_player_info;
 
 typedef struct
 {
 	char			**map;
 	int				map_height;
+	// int				pxl_size;
 	void			*mlx;
 	void			*win;
-}	t_map_info;
+	t_img			s_img;
+	t_player_info	s_player_info;
+}					t_map_info;
 
 // Libft functions
 t_list		*ft_lstnew(void *content);
@@ -54,7 +66,7 @@ t_map_info	lst_to_arr(t_list *head, t_map_info s_map_info);
 
 // Painter functions
 void		painter(t_map_info *s_map_info);
-void		make_map_image(t_map_info *s_map_info)
+void		make_map_image(t_map_info *s_map_info);
 
 // Testing functions
 void		print_list(t_list *lst); // FOR TESTING

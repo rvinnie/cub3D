@@ -2,15 +2,18 @@
 
 t_map_info lst_to_arr(t_list *head, t_map_info s_map_info)
 {
-	t_list	*cur;
-	int		i;
-	int		lst_size;
+	t_list			*cur;
+	int				i;
+	int				lst_size;
 
 	cur = head;
 	lst_size = ft_lstsize(cur);
 	if(!(s_map_info.map = (char **)malloc((lst_size + 1) * sizeof(char *))))
 		put_error(4);
 	s_map_info.map_height = lst_size;
+	//x, y player
+	// s_map_info.s_player_info->x_pos = 40;
+	// s_map_info.s_player_info->y_pos = 40;
 	i = 0;
 	while (cur)
 	{
