@@ -1,6 +1,18 @@
-#include "../includes/cub3D.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvinnie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/08 10:44:19 by rvinnie           #+#    #+#             */
+/*   Updated: 2021/02/08 10:44:20 by rvinnie          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-t_map_info lst_to_arr(t_list *head, t_map_info s_map_info)
+#include "../includes/cub3d.h"
+
+void	lst_to_arr(t_list *head, t_map *s_map)
 {
 	t_list			*cur;
 	int				i;
@@ -8,24 +20,55 @@ t_map_info lst_to_arr(t_list *head, t_map_info s_map_info)
 
 	cur = head;
 	lst_size = ft_lstsize(cur);
-	if(!(s_map_info.map = (char **)malloc((lst_size + 1) * sizeof(char *))))
+	if(!(s_map->map = (char **)malloc((lst_size + 1) * sizeof(char *))))
 		put_error(4);
-	s_map_info.map_height = lst_size;
-	//x, y player
-	// s_map_info.s_player_info->x_pos = 40;
-	// s_map_info.s_player_info->y_pos = 40;
+	s_map->map_height = lst_size;
 	i = 0;
 	while (cur)
 	{
-		s_map_info.map[i] = cur->content;
+		s_map->map[i] = cur->content;
 		cur = cur->next;
 		i++;
 	}
-	return (s_map_info);
 }
 
+void	create_player(t_map *s_map, int x, int y, char dir)
+{
+	s_map->s_player.x_pos = x * PXL_SIZE;
+	s_map->s_player.y_pos = y * PXL_SIZE;
+	s_map->s_player.direction = dir;
+}
 
-t_map_info parser(char *path, t_map_info s_map_info)
+void	find_player(t_map *s_map)
+{
+	int		i;
+	int		j;
+	int		is_correct;
+	char	let;
+
+	i = 0;
+	is_correct = 0;
+	while (i < s_map->map_height)
+	{
+		j = 0;
+		while (s_map->map[i][j])
+		{
+			let = s_map->map[i][j];
+			if (find_chr(let, "NSWE"))
+			{
+				is_correct = 1;
+				create_player(s_map, j, i, let);
+				break;
+			}
+			j++;
+		}
+		i++;
+	}
+	if (!is_correct)
+		put_error(5);
+}
+
+void	parser(char *path, t_map *s_map)
 {
 	int		fd;
 	int		count;
@@ -43,7 +86,7 @@ t_map_info parser(char *path, t_map_info s_map_info)
 		ft_lstadd_back(&head, ft_lstnew(line));
 	}
 	ft_lstadd_back(&head, ft_lstnew(line));
-	s_map_info = lst_to_arr(head, s_map_info);
+	lst_to_arr(head, s_map);
+	find_player(s_map);
 	close(fd);
-	return (s_map_info);
 }

@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
+/*   painter.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rvinnie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 10:42:30 by rvinnie           #+#    #+#             */
-/*   Updated: 2021/02/08 10:42:32 by rvinnie          ###   ########.fr       */
+/*   Created: 2021/02/08 10:43:49 by rvinnie           #+#    #+#             */
+/*   Updated: 2021/02/08 10:43:52 by rvinnie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_lstsize(t_list *lst)
-{
-	int count;
+#include "../includes/cub3d.h"
 
-	count = 0;
-	while (lst)
-	{
-		count++;
-		lst = lst->next;
-	}
-	return (count);
+void	painter(t_map *s_map)
+{
+	t_ray s_ray;
+
+	s_map->s_ray = &s_ray;
+	s_ray.alpha = dir_to_degree(s_map->s_player) - M_PI / 6;
+	s_map->mlx = mlx_init();
+	s_map->win = mlx_new_window(s_map->mlx, 1800, 1000, "cub3D");
+	make_map_image(s_map);
+	mlx_loop(s_map->mlx);
 }

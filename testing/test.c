@@ -1,4 +1,4 @@
-#include "../includes/cub3D.h"
+#include "../includes/cub3d.h"
 
 
 typedef struct

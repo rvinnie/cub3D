@@ -1,16 +1,29 @@
-#include "../includes/cub3D.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lst_funcs.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvinnie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/08 10:43:21 by rvinnie           #+#    #+#             */
+/*   Updated: 2021/02/08 10:43:22 by rvinnie          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-t_list *ft_lstnew(void *content)
+#include "../includes/cub3d.h"
+
+t_list	*ft_lstnew(void *content)
 {
-	t_list *item;
+	t_list	*item;
+
 	if (!(item = malloc(sizeof(t_list))))
 		return (NULL);
 	item->content = content;
 	item->next = NULL;
-	return (item); 
+	return (item);
 }
 
-t_list *ft_lstlast(t_list *lst)
+t_list	*ft_lstlast(t_list *lst)
 {
 	if (lst)
 	{
@@ -22,9 +35,9 @@ t_list *ft_lstlast(t_list *lst)
 	return (lst);
 }
 
-void ft_lstadd_back(t_list **lst, t_list *cur)
+void	ft_lstadd_back(t_list **lst, t_list *cur)
 {
-	t_list *tail;
+	t_list	*tail;
 
 	tail = *lst;
 	if (*lst)
@@ -36,9 +49,9 @@ void ft_lstadd_back(t_list **lst, t_list *cur)
 		*lst = cur;
 }
 
-int ft_lstsize(t_list *lst)
+int		ft_lstsize(t_list *lst)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (lst)
@@ -51,11 +64,10 @@ int ft_lstsize(t_list *lst)
 
 // FOR TESTING
 
-void print_list(t_list *lst)
+void	print_list(t_list *lst)
 {
 	while (lst)
 	{
-		// write(1,"f",1);
 		printf("%s\n", (char *)lst->content);
 		lst = lst->next;
 	}

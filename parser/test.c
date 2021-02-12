@@ -1,14 +1,6 @@
-#include <stdio.h>
+#include "../includes/cub3d.h"
 
-
-typedef struct	s_list
+void	testing_raycasting(t_map *s_map)
 {
-	void			*content;
-	struct s_list	*next;
-}	t_list;
-
-
-int main()
-{
-
+    printf("%d\n", s_map->map_height);
 }

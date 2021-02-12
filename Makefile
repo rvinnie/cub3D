@@ -1,28 +1,52 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rvinnie <marvin@42.fr>                     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/02/08 17:29:43 by rvinnie           #+#    #+#              #
+#    Updated: 2021/02/08 17:29:45 by rvinnie          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC			=	gcc
 
 RM			=	rm -f
 
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -g
 
 NAME		=	cub3D
 
 SRCS		=	main.c \
 				parser/parser.c \
-				painter/painter.c \
-				painter/paint_map.c \
+				game_graphics/painter.c \
+				game_graphics/paint_map.c \
+				game_graphics/raycasting.c \
+				game_graphics/draw_line.c \
 				gnl/get_next_line_utils.c \
 				gnl/get_next_line.c \
 				libft/lst_funcs.c \
-				utils/error_handler.c
-				
+				libft/find_chr.c \
+				utils/error_handler.c \
+				utils/dir_to_degree.c \
+				utils/change_degree.c \
+				utils/trigonometry_funcs.c \
+				utils/check_border.c
 
 OBJS		=	$(SRCS:.c=.o)
 
 # %.o:%.c
 # 	$(CC) -Wall -Wextra -Werror -I./includes -Imlx_linux -O3 -c $< -o $@
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L.mlx -lmlx_Linux -lXext -lX11 -lm -lz
+# $(NAME): $(OBJS)
+# 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L.mlx -lmlx_Linux -lXext -lX11 -lm -lz
+
+# $(NAME): $(OBJS)
+# 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+
+$(NAME):	$(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 all:	$(NAME)
 

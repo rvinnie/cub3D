@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
+/*   dir_to_degree.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rvinnie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 10:42:30 by rvinnie           #+#    #+#             */
-/*   Updated: 2021/02/08 10:42:32 by rvinnie          ###   ########.fr       */
+/*   Created: 2021/02/09 13:17:23 by rvinnie           #+#    #+#             */
+/*   Updated: 2021/02/09 13:17:24 by rvinnie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_lstsize(t_list *lst)
-{
-	int count;
+#include "../includes/cub3d.h"
 
-	count = 0;
-	while (lst)
-	{
-		count++;
-		lst = lst->next;
-	}
-	return (count);
+double	dir_to_degree(t_player s_player)
+{
+	char    dir;
+	double  alpha;
+
+	dir = s_player.direction;
+	if (dir == 'N')
+		alpha = M_PI / 2;
+	else if (dir == 'S')
+		alpha = M_PI * 3 / 2;
+	else if (dir == 'W')
+		alpha = M_PI;
+	else
+		alpha = 0;
+	return (alpha);
 }

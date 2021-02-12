@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
+/*   find_chr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rvinnie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 10:42:30 by rvinnie           #+#    #+#             */
-/*   Updated: 2021/02/08 10:42:32 by rvinnie          ###   ########.fr       */
+/*   Created: 2021/02/08 10:41:22 by rvinnie           #+#    #+#             */
+/*   Updated: 2021/02/08 10:54:51 by rvinnie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_lstsize(t_list *lst)
+int	find_chr(char ch, char *str)
 {
-	int count;
+	int i;
 
-	count = 0;
-	while (lst)
+	i = 0;
+	while (str[i])
 	{
-		count++;
-		lst = lst->next;
+		if (str[i] == ch)
+			return (1);
+		i++;
 	}
-	return (count);
+	return (0);
 }

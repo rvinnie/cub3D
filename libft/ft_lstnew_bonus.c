@@ -1,14 +1,19 @@
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvinnie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/08 10:42:07 by rvinnie           #+#    #+#             */
+/*   Updated: 2021/02/08 10:42:09 by rvinnie          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-typedef struct	s_list
+t_list	*ft_lstnew(void *content)
 {
-	void			*content;
-	struct s_list	*next;
-}	t_list;
+	t_list	*item;
 
-t_list *ft_lstnew(void *content)
-{
-	t_list *item;
 	if (!(item = malloc(sizeof(t_list))))
 		return (NULL);
 	item->content = content;
