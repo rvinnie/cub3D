@@ -76,8 +76,7 @@ void	draw_line(t_ray *s_ray, t_map *s_map, double alpha)
 	if (flag == 1)
 	{
 		if (fabs(alpha - M_PI / 2) < 0.00001 || fabs(alpha - 3 * M_PI / 2) < 0.00001)
-			printf("\n%ld\n", s_ray->ver_wall_y);
-			// make_extra_vertical(alpha, fabs(s_ray->ver_wall_y - cur_y), s_map, cur_x, cur_y);
+			make_extra_vertical(alpha, s_ray->hor_dist, s_map, cur_x, cur_y);
 		while (cur_x != last_x && cur_y != last_y)
 		{
 			y_dist = 1;
@@ -94,7 +93,7 @@ void	draw_line(t_ray *s_ray, t_map *s_map, double alpha)
 	else
 	{
 		if (fabs(alpha - M_PI * 2) < 0.00001 || fabs(alpha - M_PI) < 0.00001)
-			make_extra_horizont(alpha, fabs(s_ray->ver_wall_x - cur_x), s_map, cur_x, cur_y);
+			make_extra_horizont(alpha, s_ray->ver_dist, s_map, cur_x, cur_y);
 		while (cur_x != last_x && cur_y != last_y)
 		{
 			x_dist = 1;

@@ -63,14 +63,15 @@ void	find_horisontal_wall(t_ray *s_ray, t_map *s_map)
 		
 		s_ray->cur_h_x += x_dist;  // 5) If there is no wall, extend the to the next intersection point. Notice that the coordinate of the next intersection point -call it (Xnew,Ynew) is Xnew=Xold+Xa, and Ynew=YOld+Ya.
 		s_ray->cur_h_y += y_dist;
-		// pxl_put(&s_map->s_img, (int)s_ray->cur_h_x, (int)s_ray->cur_h_y, 0x00000000, 2);
+		// pxl_put(&s_map->s_img, (int)s_ray->cur_h_x, (int)s_ray->cur_h_y, 0x00000000, 4);
 	}
-	// pxl_put(&s_map->s_img, (int)s_ray->cur_h_x, (int)s_ray->cur_h_y, 0x00000000, 2);
+	// pxl_put(&s_map->s_img, (int)s_ray->cur_h_x, (int)s_ray->cur_h_y, 0x00000000, 4);
 	if (s_ray->cur_h_x < 0)
 		s_ray->cur_h_x = 0;
 	if (s_ray->cur_h_y < 0)
 		s_ray->cur_h_y = 0;
 	s_ray->hor_dist = fabs(s_map->s_player.y_pos - s_ray->cur_h_y) / positive_sin(s_ray->alpha);
+	// s_ray->ver_dist = sqrt((pow(s_map->s_player.x_pos - s_ray->cur_h_x, 2) + pow(s_map->s_player.y_pos - s_ray->cur_h_y, 2)));
 	s_ray->hor_wall_x = s_ray->cur_h_x;
 	s_ray->hor_wall_y = s_ray->cur_h_y;
     // calculate distance
@@ -129,14 +130,15 @@ void	find_vertical_wall(t_ray *s_ray, t_map *s_map)
 			break;
 		s_ray->cur_h_x += x_dist;  // 5) If there is no wall, extend the to the next intersection point. Notice that the coordinate of the next intersection point -call it (Xnew,Ynew) is Xnew=Xold+Xa, and Ynew=YOld+Ya.
 		s_ray->cur_h_y += y_dist;
-		// pxl_put(&s_map->s_img, (int)s_ray->cur_h_x, (int)s_ray->cur_h_y, 0x00FF00FF, 2);
+		// pxl_put(&s_map->s_img, (int)s_ray->cur_h_x, (int)s_ray->cur_h_y, 0x00FF00FF, 4);
 	}
-	// pxl_put(&s_map->s_img, (int)s_ray->cur_h_x, (int)s_ray->cur_h_y, 0x00FF00FF, 2);
+	// pxl_put(&s_map->s_img, (int)s_ray->cur_h_x, (int)s_ray->cur_h_y, 0x00FF00FF, 4);
 	if (s_ray->cur_h_x < 0)
 		s_ray->cur_h_x = 0;
 	if (s_ray->cur_h_y < 0)
 		s_ray->cur_h_y = 0;
-	s_ray->ver_dist = fabs(s_map->s_player.y_pos - s_ray->cur_h_y) / positive_sin(s_ray->alpha);
+	s_ray->ver_dist = fabs(s_map->s_player.x_pos - s_ray->cur_h_x) / positive_cos(s_ray->alpha);
+	// s_ray->ver_dist = sqrt((pow(s_map->s_player.x_pos - s_ray->cur_h_x, 2) + pow(s_map->s_player.y_pos - s_ray->cur_h_y, 2)));
 	s_ray->ver_wall_x = s_ray->cur_h_x;
 	s_ray->ver_wall_y = s_ray->cur_h_y;
 
@@ -146,13 +148,25 @@ void	find_vertical_wall(t_ray *s_ray, t_map *s_map)
 
 void	raycasting(t_map *s_map, t_ray *s_ray)
 {
-	find_horisontal_wall(s_ray, s_map);
-	find_vertical_wall(s_ray, s_map);
-	draw_line(s_ray, s_map, s_ray->alpha);
+	// find_horisontal_wall(s_ray, s_map);
+	// find_vertical_wall(s_ray, s_map);
+	// draw_line(s_ray, s_map, s_ray->alpha);
+	int x = 120;
+	while (x--)
+	{
+		find_horisontal_wall(s_ray, s_map);
+		find_vertical_wall(s_ray, s_map);
+		draw_line(s_ray, s_map, s_ray->alpha);
+		s_ray->alpha = change_degree(s_ray->alpha, M_PI / (360 * 2), 1);
+	}
+	s_ray->alpha = change_degree(s_ray->alpha, M_PI * 119 / (360 * 2), -1);
+
+
+
 	printf("\ndist_hor: %f\n", s_ray->hor_dist);
-	// printf("hor coord: (%zu, %zu)\n", s_ray->hor_wall_x, s_ray->hor_wall_y);
+	printf("hor coord: (%zu, %zu)\n", s_ray->hor_wall_x, s_ray->hor_wall_y);
 	printf("dist_ver: %f\n", s_ray->ver_dist);
-	// printf("ver coord: (%zu, %zu)\n\n", s_ray->ver_wall_x, s_ray->ver_wall_y);
+	printf("ver coord: (%zu, %zu)\n\n", s_ray->ver_wall_x, s_ray->ver_wall_y);
     // 1) Based on the viewing angle, subtract 30 degrees (half of the FOV).
     // 2) Starting from column 0:
     //  a) Cast a ray.

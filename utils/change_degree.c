@@ -12,12 +12,12 @@
 
 #include "../includes/cub3d.h"
 
-double	change_degree(double degree, int direction)
+double	change_degree(double degree, double count, int direction)
 {
 	if (direction > 0)
-		degree += M_PI / 90;
+		degree += count;
 	else
-		degree -= M_PI / 90;
+		degree -= count;
 	if (degree >= 2 * M_PI)
 		degree -= 2 * M_PI;
 	else if (degree < 0)

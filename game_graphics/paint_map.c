@@ -74,22 +74,21 @@ int redrawer(int keycode, t_map *s_map)
 	// if (keycode == 49)
 	// 	raycasting(s_map);
 
-	if (keycode == 124)
-		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, -1);
-	else if (keycode == 123)
-		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, 1);
-	else if (keycode == 13) // up
+	if (keycode == 65363)  //124 left rotate
+		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / 90, -1);
+	else if (keycode == 65361) //123 right rotate
+		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / 90, 1);
+	else if (keycode == 119) // up 13
 		s_map->s_player.y_pos -= PLAYER_STEP;
-	else if (keycode == 1) // down
+	else if (keycode == 's') // down 1
 		s_map->s_player.y_pos += PLAYER_STEP;
-	else if (keycode == 2) // right
+	else if (keycode == 'd') // right 2
 		s_map->s_player.x_pos += PLAYER_STEP;
-	else
+	else if (keycode == 'a')
 		s_map->s_player.x_pos -= PLAYER_STEP; // left
 	map_drawer(s_map->s_img, s_map);
 	player_drawer(s_map->s_img, s_map->s_player);
 	raycasting(s_map, s_map->s_ray);
-	write(1,"\n^\n",1);
 	mlx_put_image_to_window(s_map->mlx, s_map->win, s_map->s_img.img, 0, 0);
 	return (1);
 }
@@ -98,7 +97,7 @@ void	make_map_image(t_map *s_map)
 {
 	t_img	s_img;
 
-	s_img.img = mlx_new_image(s_map->mlx, 1800, 1000);
+	s_img.img = mlx_new_image(s_map->mlx, SCREEN_WIDTH, SCREEN_WIDTH);
 	s_img.addr = mlx_get_data_addr(s_img.img, &s_img.bit_per_pixel, &s_img.line_len, &s_img.endian);
 	map_drawer(s_img, s_map);
 	player_drawer(s_img, s_map->s_player);

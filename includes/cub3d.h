@@ -27,9 +27,11 @@
 # define FLOOR_COLOR 0x00FFFFFF
 # define PLAYER_COLOR 0x00FF0DD3
 # define SPRITE_COLOR 0x002CA838
+# define SCREEN_WIDTH 1200
+# define SCREEN_HEIGHT 800
 # define PLAYER_STEP 4 // 5
 # define PXL_SIZE 32 // 32 
-# define PLAYER_SIZE 1 // 16
+# define PLAYER_SIZE 4 // 16
 # define INFINITY_LOOP 1
 
 // 320x200
@@ -106,7 +108,7 @@ double				positive_sin(double deg);
 double				positive_cos(double deg);
 double				positive_tan(double deg);
 void				check_border(t_map *s_map, long int *y, long int *x);
-double				change_degree(double degree, int direction);
+double				change_degree(double degree, double count, int direction);
 
 // Parser functions
 void				parser(char *path, t_map *s_map);
