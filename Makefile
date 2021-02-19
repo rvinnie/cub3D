@@ -24,6 +24,7 @@ SRCS		=	main.c \
 				game_graphics/paint_map.c \
 				game_graphics/raycasting.c \
 				game_graphics/draw_line.c \
+				game_graphics/find_walls.c \
 				gnl/get_next_line_utils.c \
 				gnl/get_next_line.c \
 				libft/lst_funcs.c \
@@ -32,7 +33,8 @@ SRCS		=	main.c \
 				utils/dir_to_degree.c \
 				utils/change_degree.c \
 				utils/trigonometry_funcs.c \
-				utils/check_border.c
+				utils/check_border.c \
+				utils/fishbowl_handler.c
 
 OBJS		=	$(SRCS:.c=.o)
 

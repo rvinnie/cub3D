@@ -27,11 +27,11 @@
 # define FLOOR_COLOR 0x00FFFFFF
 # define PLAYER_COLOR 0x00FF0DD3
 # define SPRITE_COLOR 0x002CA838
-# define SCREEN_WIDTH 1200
-# define SCREEN_HEIGHT 800
+# define SCREEN_WIDTH 320
+# define SCREEN_HEIGHT 200
 # define PLAYER_STEP 4 // 5
-# define PXL_SIZE 32 // 32 
-# define PLAYER_SIZE 4 // 16
+# define PXL_SIZE 64 // 32
+# define PLAYER_SIZE 1 // 16
 # define INFINITY_LOOP 1
 
 // 320x200
@@ -109,6 +109,7 @@ double				positive_cos(double deg);
 double				positive_tan(double deg);
 void				check_border(t_map *s_map, long int *y, long int *x);
 double				change_degree(double degree, double count, int direction);
+double				fishbowl_handler(double alpha);
 
 // Parser functions
 void				parser(char *path, t_map *s_map);
@@ -122,6 +123,10 @@ void				make_map_image(t_map *s_map);
 // Raycaster functions
 void				raycasting(t_map *s_map, t_ray *s_ray);
 void				draw_line(t_ray *s_ray, t_map *s_map, double a);
+void				find_first_horisontal_wall(t_ray *s_ray, t_player *s_player);
+void				find_horisontal_wall(t_ray *s_ray, t_map *s_map);
+void				find_first_vertical_wall(t_ray *s_ray, t_player *s_player);
+void				find_vertical_wall(t_ray *s_ray, t_map *s_map);
 
 // Testing functions
 void				print_list(t_list *lst); // FOR TESTING

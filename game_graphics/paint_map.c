@@ -71,8 +71,6 @@ void	player_drawer(t_img s_img, t_player s_player)
 int redrawer(int keycode, t_map *s_map)
 {
 	// printf("%d\n",keycode);
-	// if (keycode == 49)
-	// 	raycasting(s_map);
 
 	if (keycode == 65363)  //124 left rotate
 		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / 90, -1);
@@ -86,8 +84,8 @@ int redrawer(int keycode, t_map *s_map)
 		s_map->s_player.x_pos += PLAYER_STEP;
 	else if (keycode == 'a')
 		s_map->s_player.x_pos -= PLAYER_STEP; // left
-	map_drawer(s_map->s_img, s_map);
-	player_drawer(s_map->s_img, s_map->s_player);
+	// map_drawer(s_map->s_img, s_map);
+	// player_drawer(s_map->s_img, s_map->s_player);
 	raycasting(s_map, s_map->s_ray);
 	mlx_put_image_to_window(s_map->mlx, s_map->win, s_map->s_img.img, 0, 0);
 	return (1);
@@ -99,9 +97,10 @@ void	make_map_image(t_map *s_map)
 
 	s_img.img = mlx_new_image(s_map->mlx, SCREEN_WIDTH, SCREEN_WIDTH);
 	s_img.addr = mlx_get_data_addr(s_img.img, &s_img.bit_per_pixel, &s_img.line_len, &s_img.endian);
-	map_drawer(s_img, s_map);
-	player_drawer(s_img, s_map->s_player);
+	// map_drawer(s_img, s_map);
+	// player_drawer(s_img, s_map->s_player);
 	mlx_put_image_to_window(s_map->mlx, s_map->win, s_img.img, 0, 0);
 	s_map->s_img = s_img;
+	raycasting(s_map, s_map->s_ray);
 	mlx_hook(s_map->win, 2, 1L<<0, redrawer, s_map);
 }
