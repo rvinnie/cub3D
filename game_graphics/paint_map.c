@@ -62,10 +62,7 @@ void	map_drawer(t_img s_img, t_map *s_map)
 
 void	player_drawer(t_img s_img, t_player s_player)
 {
-	// write(1,"&",1);
-	// pxl_put(&s_img, s_player->x_pos * pxl_size, s_player->x_pos * pxl_size,  0x00FF0000, pxl_size);
 	pxl_put(&s_img, s_player.x_pos, s_player.y_pos, 0x00FF0000, PLAYER_SIZE);
-	// write(1,")",1);
 }
 
 int redrawer(int keycode, t_map *s_map)
@@ -73,13 +70,13 @@ int redrawer(int keycode, t_map *s_map)
 	// printf("%d\n",keycode);
 
 	if (keycode == 65363)  //124 left rotate
-		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / 90, -1);
-	else if (keycode == 65361) //123 right rotate
 		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / 90, 1);
+	else if (keycode == 65361) //123 right rotate
+		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / 90, -1);
 	else if (keycode == 119) // up 13
-		s_map->s_player.y_pos -= PLAYER_STEP;
+		forward_step(s_map->s_ray->alpha, &s_map->s_player.x_pos, &s_map->s_player.y_pos);
 	else if (keycode == 's') // down 1
-		s_map->s_player.y_pos += PLAYER_STEP;
+		backward_step(s_map->s_ray->alpha, &s_map->s_player.x_pos, &s_map->s_player.y_pos);
 	else if (keycode == 'd') // right 2
 		s_map->s_player.x_pos += PLAYER_STEP;
 	else if (keycode == 'a')

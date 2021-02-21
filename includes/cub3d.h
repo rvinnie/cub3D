@@ -27,9 +27,9 @@
 # define FLOOR_COLOR 0x00FFFFFF
 # define PLAYER_COLOR 0x00FF0DD3
 # define SPRITE_COLOR 0x002CA838
-# define SCREEN_WIDTH 320
-# define SCREEN_HEIGHT 200
-# define PLAYER_STEP 4 // 5
+# define SCREEN_WIDTH 320 * 2
+# define SCREEN_HEIGHT 200 * 2
+# define PLAYER_STEP 8 // 5
 # define PXL_SIZE 64 // 32
 # define PLAYER_SIZE 1 // 16
 # define INFINITY_LOOP 1
@@ -71,6 +71,7 @@ typedef struct
 	long int		hor_wall_y;
 	double			hor_dist;
 	double			alpha;
+	double			fov_angle;
 }					t_ray;
 
 typedef struct
@@ -108,8 +109,12 @@ double				positive_sin(double deg);
 double				positive_cos(double deg);
 double				positive_tan(double deg);
 void				check_border(t_map *s_map, long int *y, long int *x);
+
+
+// Moving
 double				change_degree(double degree, double count, int direction);
-double				fishbowl_handler(double alpha);
+void				forward_step(double alpha, long int *x_pos, long int *y_pos);
+void				backward_step(double alpha, long int *x_pos, long int *y_pos);
 
 // Parser functions
 void				parser(char *path, t_map *s_map);
