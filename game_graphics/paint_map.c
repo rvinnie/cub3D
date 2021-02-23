@@ -69,18 +69,18 @@ int redrawer(int keycode, t_map *s_map)
 {
 	// printf("%d\n",keycode);
 
-	if (keycode == 65363)  //124 left rotate
-		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / 90, 1);
-	else if (keycode == 65361) //123 right rotate
-		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / 90, -1);
-	else if (keycode == 119) // up 13
-		forward_step(s_map->s_ray->alpha, &s_map->s_player.x_pos, &s_map->s_player.y_pos);
-	else if (keycode == 's') // down 1
-		backward_step(s_map->s_ray->alpha, &s_map->s_player.x_pos, &s_map->s_player.y_pos);
-	else if (keycode == 'd') // right 2
-		s_map->s_player.x_pos += PLAYER_STEP;
-	else if (keycode == 'a')
-		s_map->s_player.x_pos -= PLAYER_STEP; // left
+	if (keycode == 124)  //124 left rotate 65363
+		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / (60), -1); // M_PI / (3 * 320)
+	else if (keycode == 123) //123 right rotate 65361
+		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / (60), 1);
+	else if (keycode == 13) // up 119
+		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 0);
+	else if (keycode == 1) // down s
+		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 1);
+	else if (keycode == 2) // right d
+		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 2);
+	else if (keycode == 0) // a
+		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 3);
 	// map_drawer(s_map->s_img, s_map);
 	// player_drawer(s_map->s_img, s_map->s_player);
 	raycasting(s_map, s_map->s_ray);

@@ -27,11 +27,11 @@
 # define FLOOR_COLOR 0x00FFFFFF
 # define PLAYER_COLOR 0x00FF0DD3
 # define SPRITE_COLOR 0x002CA838
-# define SCREEN_WIDTH 320 * 2
-# define SCREEN_HEIGHT 200 * 2
-# define PLAYER_STEP 8 // 5
-# define PXL_SIZE 64 // 32
-# define PLAYER_SIZE 1 // 16
+# define SCREEN_WIDTH 320 * 2// 320
+# define SCREEN_HEIGHT 200 * 2// 200
+# define PLAYER_STEP 20 // 10
+# define PXL_SIZE 64 // 64
+# define PLAYER_SIZE 1 // 1
 # define INFINITY_LOOP 1
 
 // 320x200
@@ -53,8 +53,8 @@ typedef struct
 
 typedef struct
 {
-	long int		x_pos;
-	long int		y_pos;
+	double			x_pos;
+	double			y_pos;
 	char			direction;
 }					t_player;
 
@@ -64,11 +64,11 @@ typedef struct
 	double			ray_dir_y;
 	double			cur_h_x;
     double			cur_h_y;
-	long int		ver_wall_x;
-	long int		ver_wall_y;
+	double			ver_wall_x;
+	double			ver_wall_y;
 	double			ver_dist;
-	long int		hor_wall_x;
-	long int		hor_wall_y;
+	double			hor_wall_x;
+	double			hor_wall_y;
 	double			hor_dist;
 	double			alpha;
 	double			fov_angle;
@@ -84,15 +84,6 @@ typedef struct
 	t_ray			*s_ray;
 	t_player		s_player;
 }					t_map;
-
-typedef struct
-{
-	int				last_x;
-	int				last_y;
-	int				x;
-	int				y;
-	double			diff_y;
-}					t_draw_ray;
 
 // Libft functions
 t_list				*ft_lstnew(void *content);
@@ -113,8 +104,7 @@ void				check_border(t_map *s_map, long int *y, long int *x);
 
 // Moving
 double				change_degree(double degree, double count, int direction);
-void				forward_step(double alpha, long int *x_pos, long int *y_pos);
-void				backward_step(double alpha, long int *x_pos, long int *y_pos);
+void				make_step(t_map *s_map, double *x_pos, double *y_pos, int side);
 
 // Parser functions
 void				parser(char *path, t_map *s_map);
