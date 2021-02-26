@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
 	// int 	i;
 
 	t_map s_map;
+
 	if (argc != 2)
 		put_error(1);
 	parser(argv[1], &s_map);

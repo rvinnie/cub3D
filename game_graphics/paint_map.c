@@ -65,22 +65,22 @@ void	player_drawer(t_img s_img, t_player s_player)
 	pxl_put(&s_img, s_player.x_pos, s_player.y_pos, 0x00FF0000, PLAYER_SIZE);
 }
 
-int redrawer(int keycode, t_map *s_map)
+int		click_handler(int keycode, t_map *s_map)
 {
 	// printf("%d\n",keycode);
 
 	if (keycode == 124)  //124 left rotate 65363
-		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / (60), -1); // M_PI / (3 * 320)
+		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / (80), -1); // M_PI / (3 * 320)
 	else if (keycode == 123) //123 right rotate 65361
-		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / (60), 1);
+		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / (80), 1);
 	else if (keycode == 13) // up 119
-		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 0);
+		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 'f');
 	else if (keycode == 1) // down s
-		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 1);
+		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 'b');
 	else if (keycode == 2) // right d
-		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 2);
+		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 'r');
 	else if (keycode == 0) // a
-		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 3);
+		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 'l');
 	// map_drawer(s_map->s_img, s_map);
 	// player_drawer(s_map->s_img, s_map->s_player);
 	raycasting(s_map, s_map->s_ray);
@@ -99,5 +99,5 @@ void	make_map_image(t_map *s_map)
 	mlx_put_image_to_window(s_map->mlx, s_map->win, s_img.img, 0, 0);
 	s_map->s_img = s_img;
 	raycasting(s_map, s_map->s_ray);
-	mlx_hook(s_map->win, 2, 1L<<0, redrawer, s_map);
+	mlx_hook(s_map->win, 2, 1L<<0, click_handler, s_map);
 }

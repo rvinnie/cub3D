@@ -74,8 +74,9 @@ void	parser(char *path, t_map *s_map)
 	int		count;
 	char	*line;
 	t_list	*head;
-
-	if ((fd = open(path, O_RDONLY)) == -1) //"/home/rvinnie/code/21school/projects/cub3D/parser/text.txt"
+	
+	// path = "/Users/rvinnie/Desktop/cub3d/testing/text.txt";
+	if ((fd = open(path, O_RDONLY)) == -1)
 		put_error(2);
 	head = NULL;
 	line = NULL;

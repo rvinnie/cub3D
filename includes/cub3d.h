@@ -29,7 +29,7 @@
 # define SPRITE_COLOR 0x002CA838
 # define SCREEN_WIDTH 320 * 2// 320
 # define SCREEN_HEIGHT 200 * 2// 200
-# define PLAYER_STEP 20 // 10
+# define PLAYER_STEP 14 // 10
 # define PXL_SIZE 64 // 64
 # define PLAYER_SIZE 1 // 1
 # define INFINITY_LOOP 1
@@ -74,6 +74,7 @@ typedef struct
 	double			fov_angle;
 }					t_ray;
 
+
 typedef struct
 {
 	char			**map;
@@ -99,12 +100,12 @@ double				dir_to_degree(t_player s_player);
 double				positive_sin(double deg);
 double				positive_cos(double deg);
 double				positive_tan(double deg);
-void				check_border(t_map *s_map, long int *y, long int *x);
+void				check_border(t_map *s_map, int *y, int *x);
 
 
 // Moving
 double				change_degree(double degree, double count, int direction);
-void				make_step(t_map *s_map, double *x_pos, double *y_pos, int side);
+void				make_step(t_map *s_map, double *x_pos, double *y_pos, char side);
 
 // Parser functions
 void				parser(char *path, t_map *s_map);

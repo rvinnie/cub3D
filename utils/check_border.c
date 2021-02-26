@@ -12,7 +12,7 @@
 
 #include "../includes/cub3d.h"
 
-void	check_border(t_map *s_map, long int *y, long int *x)
+void	check_border(t_map *s_map, int *y, int *x)
 {
 	long int width;
 	long int heigth;

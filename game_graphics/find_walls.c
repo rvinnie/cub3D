@@ -37,8 +37,8 @@ void	find_horisontal_wall(t_ray *s_ray, t_map *s_map)
 {
 	double     	y_dist;
 	double     	x_dist;
-	long int  	is_wall_x;
-	long int  	is_wall_y;
+	int  		is_wall_x;
+	int  		is_wall_y;
 
 	find_first_horisontal_wall(s_ray, &(s_map->s_player)); // 1) Find coordinate of the first intersection (point A in this example).
 	// pxl_put(&s_map->s_img, (int)s_ray->cur_h_x, (int)s_ray->cur_h_y, 0x00FF00FF, 4);
@@ -107,8 +107,8 @@ void	find_vertical_wall(t_ray *s_ray, t_map *s_map)
 {
 	double         	y_dist;
 	double         	x_dist;
-	long int		is_wall_x;
-	long int		is_wall_y;
+	int				is_wall_x;
+	int				is_wall_y;
 
 	find_first_vertical_wall(s_ray, &(s_map->s_player)); // 1) Find coordinate of the first intersection (point A in this example).
 	// pxl_put(&s_map->s_img, (int)s_ray->cur_h_x, (int)s_ray->cur_h_y, 0x00000000, 4);
