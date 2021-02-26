@@ -16,12 +16,11 @@
 
 void	pxl_put(t_img *data, int x, int y, int color, int pxl_size)
 {
-	char *dst;
-	int i;
-	int j;
+	char	*dst;
+	int		i;
+	int		j;
 
 	i = 0;
-
 	while (i < pxl_size)
 	{
 		j = 0;
@@ -88,7 +87,7 @@ int		click_handler(int keycode, t_map *s_map)
 	return (1);
 }
 
-void	make_map_image(t_map *s_map)
+void	main_drawer(t_map *s_map)
 {
 	t_img	s_img;
 

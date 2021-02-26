@@ -14,8 +14,8 @@
 
 void	check_border(t_map *s_map, int *y, int *x)
 {
-	long int width;
-	long int heigth;
+	long int	width;
+	long int	heigth;
 
 	heigth = s_map->map_height;
 	if (*y >= heigth)

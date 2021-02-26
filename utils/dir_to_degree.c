@@ -14,8 +14,8 @@
 
 double	dir_to_degree(t_player s_player)
 {
-	char    dir;
-	double  alpha;
+	char	dir;
+	double	alpha;
 
 	dir = s_player.direction;
 	if (dir == 'N')

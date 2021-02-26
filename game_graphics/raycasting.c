@@ -36,31 +36,25 @@ void	drawing_walls(t_map *s_map, t_ray *s_ray, int x)
 	double			dist_to_wall;
 	int				slice_height;
 	double			fishbowl_val;
-	unsigned long int color = 0x00FFFFFF;
-	int clear = 0;
+	unsigned long int	color;
+	int				clear;
 
+	color = 0x00FFFFFF;
 	fishbowl_val = positive_cos(abs(SCREEN_WIDTH / 2 - (x + 1)) * (M_PI / (3 * (SCREEN_WIDTH))));
-	// if (fishbowl_val == 0)
-		// fishbowl_val = 1;
 	if (s_ray->hor_dist < s_ray->ver_dist)
 	{
-		// printf("\n!horizontal!\n");
 		dist_to_wall = s_ray->hor_dist;
 		color = 0x00E0E0E0;
 	}
 	else
-	{
-		// printf("\n!vertical!\n");
-		// printf("hor: %f\n", s_ray->hor_dist);
-		// printf("ver: %f\n", s_ray->ver_dist);
 		dist_to_wall = s_ray->ver_dist;
-	}
 	dist_to_wall *= fishbowl_val;
 	if (dist_to_wall == 0)
 		dist_to_wall = 1;
 	slice_height = 2 * round(64 * 277 / dist_to_wall);
 	if (slice_height > SCREEN_HEIGHT)
 		slice_height = SCREEN_HEIGHT;
+	clear = 0;
 	while (clear < SCREEN_HEIGHT)
 	{
 		pxl_put(&(s_map->s_img), x, clear, 0x00000000, 1);
@@ -85,8 +79,9 @@ void	raycasting(t_map *s_map, t_ray *s_ray)
 	// t_img	s_img;
 
 	// s_img.img = mlx_new_image(s_map->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	int x = 0;
+	int x;
 
+	x = 0;
 	while (x < SCREEN_WIDTH)
 	{
 		find_horisontal_wall(s_ray, s_map);
@@ -99,12 +94,5 @@ void	raycasting(t_map *s_map, t_ray *s_ray)
 		x++;
 	}
 	s_ray->alpha = change_degree(s_ray->alpha, M_PI * (SCREEN_WIDTH) / (3 * SCREEN_WIDTH), -1);
-	
 	// mlx_put_image_to_window(s_map->mlx, s_map->win, s_img.img, 0, 0);
-	// printf("hor: %f\n", s_ray->hor_dist);
-	// printf("pos_x: %f\npos_y: %f\n", s_map->s_player.x_pos, s_map->s_player.y_pos);
-	// printf("alpha %f\n", s_map->s_ray->alpha);
-	// printf("hor coord: (%zu, %zu)\n", s_ray->hor_wall_x, s_ray->hor_wall_y);
-	// printf("ver: %f\n", s_ray->ver_dist);
-	// printf("ver coord: (%zu, %zu)\n\n", s_ray->ver_wall_x, s_ray->ver_wall_y);
 }

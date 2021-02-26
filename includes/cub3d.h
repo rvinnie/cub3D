@@ -74,7 +74,6 @@ typedef struct
 	double			fov_angle;
 }					t_ray;
 
-
 typedef struct
 {
 	char			**map;
@@ -102,7 +101,6 @@ double				positive_cos(double deg);
 double				positive_tan(double deg);
 void				check_border(t_map *s_map, int *y, int *x);
 
-
 // Moving
 double				change_degree(double degree, double count, int direction);
 void				make_step(t_map *s_map, double *x_pos, double *y_pos, char side);
@@ -114,7 +112,7 @@ void				lst_to_arr(t_list *head, t_map *s_map);
 // Painter functions
 void				pxl_put(t_img *data, int x, int y, int color, int pxl_size);
 void				painter(t_map *s_map);
-void				make_map_image(t_map *s_map);
+void				main_drawer(t_map *s_map);
 
 // Raycaster functions
 void				raycasting(t_map *s_map, t_ray *s_ray);

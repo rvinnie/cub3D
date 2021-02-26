@@ -21,7 +21,7 @@ NAME		=	cub3D
 SRCS		=	main.c \
 				parser/parser.c \
 				game_graphics/painter.c \
-				game_graphics/paint_map.c \
+				game_graphics/main_drawer.c \
 				game_graphics/raycasting.c \
 				game_graphics/draw_line.c \
 				game_graphics/find_walls.c \

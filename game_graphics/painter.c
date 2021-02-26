@@ -21,6 +21,6 @@ void	painter(t_map *s_map)
 	s_ray.alpha = change_degree(s_ray.fov_angle, M_PI / 6, -1);
 	s_map->mlx = mlx_init();
 	s_map->win = mlx_new_window(s_map->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
-	make_map_image(s_map);
+	main_drawer(s_map);
 	mlx_loop(s_map->mlx);
 }
