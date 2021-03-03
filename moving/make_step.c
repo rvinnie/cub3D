@@ -32,9 +32,9 @@ void	horizontal_handler(double *x_diff, double *y_diff, double fov_angle, char s
 	double	diff_angle;
 
 	if (side == 'r')
-		fov_angle = change_degree(fov_angle, M_PI / 2, 1);
-	else if (side == 'l')
 		fov_angle = change_degree(fov_angle, M_PI / 2, -1);
+	else if (side == 'l')
+		fov_angle = change_degree(fov_angle, M_PI / 2, 1);
 	if (fov_angle > M_PI)
 		diff_angle = fabs(fov_angle - 3 * M_PI / 2);
 	else
@@ -52,9 +52,9 @@ void	vertical_handler(double *x_diff, double *y_diff, double fov_angle, char sid
 	double	diff_angle;
 
 	if (side == 'r')
-		fov_angle = change_degree(fov_angle, M_PI / 2, 1);
-	else if (side == 'l')
 		fov_angle = change_degree(fov_angle, M_PI / 2, -1);
+	else if (side == 'l')
+		fov_angle = change_degree(fov_angle, M_PI / 2, 1);
 	if (fov_angle > M_PI / 2 && fov_angle < 3 * M_PI / 2)
 		diff_angle = fabs(fov_angle - M_PI);
 	else

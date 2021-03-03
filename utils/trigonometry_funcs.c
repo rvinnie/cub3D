@@ -15,7 +15,7 @@
 double	positive_sin(double deg)
 {
 	double	val;
-	
+
 	val = sin(deg);
 	if (val < 0)
 		val *= -1;

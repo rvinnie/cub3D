@@ -1,40 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cleaning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rvinnie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 10:43:35 by rvinnie           #+#    #+#             */
-/*   Updated: 2021/02/08 10:43:37 by rvinnie          ###   ########.fr       */
+/*   Created: 2021/03/03 09:38:42 by rvinnie           #+#    #+#             */
+/*   Updated: 2021/03/03 09:38:44 by rvinnie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "../includes/cub3d.h"
 
-void	print_arr(char **arr)
+void	free_arr(char **arr)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (arr[i])
+	if (arr)
 	{
-		printf("%s\n", arr[i]);
-		i++;
+		while (arr[i])
+			free(arr[i++]);
+		free(arr);
 	}
-}
-
-int main(int argc, char *argv[])
-{
-	t_map s_map;
-
-	if (argc != 2)
-		put_error(&s_map, NULL, 1);
-	s_map.mlx = mlx_init();
-	s_map.win = mlx_new_window(s_map.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
-	main_parser(argv[1], &s_map);
-	// print_arr(s_map.map);
-	// valid_checker
-	painter(&s_map);
-	return (0);
 }

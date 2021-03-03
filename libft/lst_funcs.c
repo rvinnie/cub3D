@@ -73,6 +73,8 @@ void	print_list(t_list *lst)
 	}
 }
 
+
+
 // int main()
 // {
 // 	// int f = 123;

@@ -12,19 +12,23 @@
 
 #include "../includes/cub3d.h"
 
-void put_error(int flag)
+void put_error(t_map *s_map, char **arr, int flag)
 {
+	char	*str;
 	// don't forget to free memory
-	write(1, "Error\n", 7);
+	free_arr(arr);
+	s_map->h = s_map->h; // lol
+	write(2, "Error\n", 7);
 	if (flag == 1)
-		write(1,"Wrong number of arguments\n", 27);
+		str = "Wrong number of arguments\n";
 	else if (flag == 2)
-		write(1, "Unable to open file.\n", 22);
+		str = "Unable to open file.\n";
 	else if (flag == 3)
-		write(1, "Unable to read file.\n", 22);
+		str = "Unable to read file.\n";
 	else if (flag == 4)
-		write(1, "Unable to allocate memory.\n", 28);
+		str = "Unable to allocate memory.\n";
 	else if (flag == 5)
-		write(1, "Wrong map.\n", 11);
+		str = "Wrong map.\n";
+	write(2, str, ft_strlen(str));
 	exit(1);
 }

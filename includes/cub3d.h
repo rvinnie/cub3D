@@ -14,6 +14,7 @@
 # define CUB3D_H
 # include "get_next_line.h"
 # include "mlx.h"
+# include "libft.h"
 # include <stdlib.h>
 # include <stdio.h> //
 # include <string.h>
@@ -60,6 +61,14 @@ typedef struct
 
 typedef struct
 {
+	int				width;
+	int				height;
+	char			*addr;
+	// t_img			s_img;
+}					t_text;
+
+typedef struct
+{
 	double			ray_dir_x;
 	double			ray_dir_y;
 	double			cur_h_x;
@@ -76,13 +85,29 @@ typedef struct
 
 typedef struct
 {
-	char			**map;
+	char			*no;
+	char			*so;
+	char			*we;
+	char			*ea;
+	char			*sprite;
+	unsigned long	floor_c;
+	unsigned long	ceil_c;
+}					t_parser;
+
+typedef struct
+{
 	int				map_height;
+	int				w;
+	int				h;
+	char			**map;
 	void			*mlx;
 	void			*win;
 	t_img			s_img;
+	t_text			**s_text;
+	t_text			cur_text;
 	t_ray			*s_ray;
 	t_player		s_player;
+	t_parser		*s_parser;
 }					t_map;
 
 // Libft functions
@@ -90,24 +115,33 @@ t_list				*ft_lstnew(void *content);
 t_list				*ft_lstlast(t_list *lst);
 void				ft_lstadd_back(t_list **lst, t_list *cur);
 int					ft_lstsize(t_list *lst);
-size_t				ft_strlen(const char *s);
 int					find_chr(char ch, char *str);
 
 // Utils functions
-void				put_error(int flag);
+void				put_error(t_map *s_map, char **arr, int flag);
 double				dir_to_degree(t_player s_player);
+unsigned long		rgb_to_hex(t_map *s_map, char *rgb);
+void				lst_to_arr(t_list *head, t_map *s_map);
 double				positive_sin(double deg);
 double				positive_cos(double deg);
 double				positive_tan(double deg);
 void				check_border(t_map *s_map, int *y, int *x);
+void				free_arr(char **arr);
 
 // Moving
 double				change_degree(double degree, double count, int direction);
 void				make_step(t_map *s_map, double *x_pos, double *y_pos, char side);
 
+//Map valid
+int					is_map_checker(t_map *s_map, char **str_arr);
+
 // Parser functions
-void				parser(char *path, t_map *s_map);
+void				main_parser(char *path, t_map *s_map);
+void				get_map(t_map *s_map, int fd);
 void				lst_to_arr(t_list *head, t_map *s_map);
+void				find_player(t_map *s_map);
+t_text				**get_texture(t_map *s_map);
+void				choose_info(t_map *s_map, char **info_arr);
 
 // Painter functions
 void				pxl_put(t_img *data, int x, int y, int color, int pxl_size);
@@ -121,6 +155,9 @@ void				find_first_horisontal_wall(t_ray *s_ray, t_player *s_player);
 void				find_horisontal_wall(t_ray *s_ray, t_map *s_map);
 void				find_first_vertical_wall(t_ray *s_ray, t_player *s_player);
 void				find_vertical_wall(t_ray *s_ray, t_map *s_map);
+
+// Textures functions
+void				texture_slice(t_map *s_map, int slice_height, int slice_x, double side_dist);
 
 // Testing functions
 void				print_list(t_list *lst); // FOR TESTING

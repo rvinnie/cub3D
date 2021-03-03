@@ -1,40 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rvinnie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 10:43:35 by rvinnie           #+#    #+#             */
-/*   Updated: 2021/02/08 10:43:37 by rvinnie          ###   ########.fr       */
+/*   Created: 2020/11/02 10:16:42 by rvinnie           #+#    #+#             */
+/*   Updated: 2020/11/02 10:16:45 by rvinnie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "../includes/libft.h"
 
-void	print_arr(char **arr)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int i;
+	size_t				i;
+	unsigned const char	*str1;
+	unsigned const char	*str2;
 
+	str1 = (unsigned const char *)s1;
+	str2 = (unsigned const char *)s2;
 	i = 0;
-	while (arr[i])
+	while ((str1[i] || str2[i]) && n)
 	{
-		printf("%s\n", arr[i]);
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
 		i++;
+		n--;
 	}
-}
-
-int main(int argc, char *argv[])
-{
-	t_map s_map;
-
-	if (argc != 2)
-		put_error(&s_map, NULL, 1);
-	s_map.mlx = mlx_init();
-	s_map.win = mlx_new_window(s_map.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
-	main_parser(argv[1], &s_map);
-	// print_arr(s_map.map);
-	// valid_checker
-	painter(&s_map);
 	return (0);
 }

@@ -35,25 +35,47 @@ int main()
 
 
 	void    *mlx;
+	t_img 	cat;
 	t_img 	s_img;
 	char	*filename = "/Users/rvinnie/Desktop/cub3d/textures/cat.xpm";
     void    *mlx_win;
-	void 	*img;
 	int a;
+	int y = 0;
 	int b;
-	int c = 0;
-	int h = 0;
-	int x;
+	
+
+
 
     mlx = mlx_init();
     mlx_win = mlx_new_window(mlx, 800, 800, "Hello world!");
-	s_img.img = mlx_xpm_file_to_image(mlx, filename, &a, &b);
+	cat.img = mlx_xpm_file_to_image(mlx, filename, &a, &b);
+	cat.addr = mlx_get_data_addr(cat.img, &cat.bit_per_pixel, &cat.line_len, &cat.endian);
+
+	s_img.img = mlx_new_image(mlx, 800, 800);
+    s_img.addr = mlx_get_data_addr(s_img.img, &s_img.bit_per_pixel, &s_img.line_len,&s_img.endian);
+
 	// printf("%d\n", a);
-	s_img.addr = mlx_get_data_addr(s_img.img, &s_img.bit_per_pixel, &s_img.line_len, &s_img.endian);
+	
 
 	// printf("%s\n", ((char *)s_img.addr));
-	x = 1;
-	printf("%x\n", *((unsigned *)s_img.addr + a * 2));
+	printf("%x\n", *((unsigned *)cat.addr + a * 2));
+	// while(y < a)
+	// {
+	// 	x = 0;
+	// 	while (x < b)
+	// 	{
+	// 		pxl_put(&s_img, x, y, *((unsigned *)cat.addr + a * y + x), 1);
+	// 		x++;
+	// 	}
+	// 	y++;
+	// }
+	int x = 5;
+	while (y < b)
+	{
+		pxl_put(&s_img, x, y, *((unsigned *)cat.addr + a * y + x), 2);
+		y++;
+	}
+
 	// c = 0;
 	// while (c < 661)
 	// {

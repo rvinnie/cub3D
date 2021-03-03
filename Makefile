@@ -19,22 +19,35 @@ CFLAGS		=	-Wall -Wextra -Werror -g
 NAME		=	cub3D
 
 SRCS		=	main.c \
-				parser/parser.c \
+				parser/main_parser.c \
+				parser/player_parser.c \
+				parser/texture_parser.c \
+				parser/info_parser.c \
+				parser/map_parser.c \
 				game_graphics/painter.c \
 				game_graphics/main_drawer.c \
 				game_graphics/raycasting.c \
 				game_graphics/draw_line.c \
 				game_graphics/find_walls.c \
+				textures/texture_slice.c \
 				moving/change_degree.c \
 				moving/make_step.c \
 				gnl/get_next_line_utils.c \
 				gnl/get_next_line.c \
 				libft/lst_funcs.c \
 				libft/find_chr.c \
+				libft/ft_split.c \
+				libft/ft_strncmp.c \
+				libft/ft_atoi.c \
+				libft/ft_isdigit.c \
 				utils/error_handler.c \
 				utils/dir_to_degree.c \
+				utils/rgb_to_hex.c \
 				utils/trigonometry_funcs.c \
-				utils/check_border.c
+				utils/check_border.c \
+				utils/lst_to_arr.c \
+				utils/cleaning.c
+				
 
 OBJS		=	$(SRCS:.c=.o)
 
