@@ -35,8 +35,6 @@ t_text	choose_texture(t_map *s_map) // clear
 		alpha_dir_v = '-';
 	else
 		alpha_dir_v = '+';
-
-
 	count = 0;
 	if (hit_dir == 'h')
 	{
@@ -72,12 +70,12 @@ void	texture_slice_second(t_map *s_map, int slice_height, int slice_x, double st
 	double			texture_y;
 
 	i = 0;
-	start_point = SCREEN_HEIGHT / 2 - slice_height / 2;
-	if (slice_height > SCREEN_HEIGHT)
+	start_point = s_map->h / 2 - slice_height / 2;
+	if (slice_height > s_map->h)
 		start_point = 0;
-	texture_y = (start_point - SCREEN_HEIGHT / 2 + slice_height / 2) * step;
-	fill_space(s_map, slice_x, i, start_point, 0x00A7A7AB);
-	while (i <= slice_height && i <= SCREEN_HEIGHT)
+	texture_y = (start_point - s_map->h / 2 + slice_height / 2) * step;
+	fill_space(s_map, slice_x, i, start_point, s_map->s_parser->ceil_c);
+	while (i < slice_height && i <= s_map->h)
 	{
 		color = *((unsigned int*)s_map->cur_text.addr + ((int)texture_y * s_map->cur_text.width + texture_x));
 		pxl_put(&(s_map->s_img), slice_x, start_point, color, 1);
@@ -85,7 +83,7 @@ void	texture_slice_second(t_map *s_map, int slice_height, int slice_x, double st
 		texture_y += step;
 		i++;
 	}
-	fill_space(s_map, slice_x, start_point--, SCREEN_HEIGHT, 0x00A79390);
+	fill_space(s_map, slice_x, start_point--, s_map->h, 0x00A79390);
 }
 
 void	texture_slice(t_map *s_map, int slice_height, int slice_x, double side_dist)

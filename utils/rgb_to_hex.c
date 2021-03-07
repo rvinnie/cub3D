@@ -12,17 +12,49 @@
 
 #include "../includes/cub3d.h"
 
-unsigned long	rgb_to_hex(t_map *s_map, char *rgb)
+int				check_digit(char **arr_color)
 {
-	int r;
-	int g;
-	int b;
-	char **arr_color;
+	int		i;
+	int		j;
+	char	*cur_digit;
+
+	i = 0;
+	while (arr_color[i])
+	{
+		j = 0;
+		cur_digit = arr_color[i];
+		while (cur_digit[j])
+		{
+			if (!(cur_digit[j] >= '0' && cur_digit[j] <= '9'))
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
+char			**check_color_valid(t_map *s_map, char *rgb)
+{
+	char	**arr_color;
 
 	if (!(arr_color = ft_split(rgb, ',')))
 		put_error(s_map, NULL, 4);
 	if (!arr_color[0] || !arr_color[1] || !arr_color[2])
 		put_error(s_map, arr_color, 5);
+	if (!check_digit(arr_color))
+		put_error(s_map, arr_color, 5);
+	return (arr_color);
+}
+
+unsigned long	rgb_to_hex(t_map *s_map, char *rgb)
+{
+	int		r;
+	int		g;
+	int		b;
+	char	**arr_color;
+
+	arr_color = check_color_valid(s_map, rgb);
 	r = ft_atoi(arr_color[0]);
 	g = ft_atoi(arr_color[1]);
 	b = ft_atoi(arr_color[2]);

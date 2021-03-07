@@ -28,8 +28,6 @@
 # define FLOOR_COLOR 0x00FFFFFF
 # define PLAYER_COLOR 0x00FF0DD3
 # define SPRITE_COLOR 0x002CA838
-# define SCREEN_WIDTH 320 * 2// 320
-# define SCREEN_HEIGHT 200 * 2// 200
 # define PLAYER_STEP 14 // 10
 # define PXL_SIZE 64 // 64
 # define PLAYER_SIZE 1 // 1

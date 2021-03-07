@@ -65,14 +65,16 @@ void	main_parser(char *path, t_map *s_map)
 	int		fd;
 
 	// path = "/Users/rvinnie/Desktop/cub3d/testing/text.txt";
-	s_map->w = 0;
+
 	if ((fd = open(path, O_RDONLY)) == -1)
 		put_error(s_map, NULL, 2);
 	get_info(s_map, fd);
+
 	close(fd);
 	if ((fd = open(path, O_RDONLY)) == -1)
 		put_error(s_map, NULL, 2);
 	get_map(s_map, fd);
+	// write()
 	find_player(s_map);
 	s_map->s_text = get_texture(s_map);
 	close(fd);

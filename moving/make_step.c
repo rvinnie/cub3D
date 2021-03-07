@@ -74,7 +74,7 @@ void	make_step(t_map *s_map, double *x_pos, double *y_pos, char side)
 	double	y_diff;
 
 	fov_angle = s_map->s_ray->fov_angle;
-	if ((fov_angle >= M_PI / 4 && fov_angle <= 3 * M_PI / 4) || (fov_angle >= 5 * M_PI / 4 && fov_angle <= 7 * M_PI / 4))
+	if ((fov_angle >= M_PI / 4 && fov_angle < 3 * M_PI / 4) || (fov_angle >= 5 * M_PI / 4 && fov_angle < 7 * M_PI / 4))
 		horizontal_handler(&x_diff, &y_diff, fov_angle, side);
 	else
 		vertical_handler(&x_diff, &y_diff, fov_angle, side);
