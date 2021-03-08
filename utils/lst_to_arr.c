@@ -15,12 +15,13 @@
 char	*create_new_line(char *line)
 {
 	int		len;
-	int		i = 0;
+	int		i;
 	char	*new_line;
 
 	len = ft_strlen(line);
 	if (!(new_line = (char*)malloc(len + 1)))
 		return (NULL);
+	i = 0;
 	while (len--)
 	{
 		if (line[i] == ' ')
@@ -51,7 +52,6 @@ void	lst_to_arr(t_list *head, t_map *s_map)
 		new_line = create_new_line((char *)cur->content);
 		if (!new_line)
 			put_error(s_map, NULL, 4);
-		// printf("%s\n", (char*)cur->content);
 		s_map->map[i] = new_line;
 		cur = cur->next;
 		i++;

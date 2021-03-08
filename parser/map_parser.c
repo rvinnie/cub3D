@@ -9,7 +9,7 @@ int		is_line_checker(char *str)
 	int		first_len;
 	int		second_len;
 
-	if (!(valid_sym = ft_strdup("01 2NSWE")))
+	if (!(valid_sym = ft_strdup("012NSWE")))
 		return (-1);
 	first_len = ft_strlen(str);
 	second_len = ft_strlen(valid_sym);

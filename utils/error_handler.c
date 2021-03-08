@@ -29,6 +29,8 @@ void put_error(t_map *s_map, char **arr, int flag)
 		str = "Unable to allocate memory.\n";
 	else if (flag == 5)
 		str = "Wrong map.\n";
+	else if (flag == 6)
+		str = "Wrong path.\n";
 	write(2, str, ft_strlen(str));
 	exit(1);
 }

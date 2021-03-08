@@ -55,10 +55,24 @@ void	get_info(t_map *s_map, int fd)
 		put_error(s_map, NULL, 5);
 }
 
-// void	get_info(t_map *s_map, int fd)
-// {
-// 	get_map(s_map, fd);
-// }
+void	check_path(char *path, t_map *s_map)
+{
+	int	flag;
+
+	flag = 0;
+	while (*path)
+	{
+		if (*path == '.')
+		{
+			path++;
+			if (ft_strncmp(path, "cub", 4) == 0)
+				flag = 1;
+		}
+		path++;
+	}
+	if (flag == 0)
+		put_error(s_map, NULL, 6);
+}
 
 void	main_parser(char *path, t_map *s_map)
 {
@@ -66,6 +80,7 @@ void	main_parser(char *path, t_map *s_map)
 
 	// path = "/Users/rvinnie/Desktop/cub3d/testing/text.txt";
 
+	check_path(path, s_map);
 	if ((fd = open(path, O_RDONLY)) == -1)
 		put_error(s_map, NULL, 2);
 	get_info(s_map, fd);
