@@ -12,11 +12,33 @@
 
 #include "../includes/cub3d.h"
 
+char	*create_new_line(char *line)
+{
+	int		len;
+	int		i = 0;
+	char	*new_line;
+
+	len = ft_strlen(line);
+	if (!(new_line = (char*)malloc(len + 1)))
+		return (NULL);
+	while (len--)
+	{
+		if (line[i] == ' ')
+			new_line[i] = '0';
+		else
+			new_line[i] = line[i];
+		i++;
+	}
+	new_line[i] = '\0';
+	return (new_line);
+}
+
 void	lst_to_arr(t_list *head, t_map *s_map)
 {
 	t_list			*cur;
 	int				i;
 	int				lst_size;
+	char			*new_line;
 
 	cur = head;
 	lst_size = ft_lstsize(cur);
@@ -26,7 +48,11 @@ void	lst_to_arr(t_list *head, t_map *s_map)
 	i = 0;
 	while (cur)
 	{
-		s_map->map[i] = cur->content;
+		new_line = create_new_line((char *)cur->content);
+		if (!new_line)
+			put_error(s_map, NULL, 4);
+		// printf("%s\n", (char*)cur->content);
+		s_map->map[i] = new_line;
 		cur = cur->next;
 		i++;
 	}

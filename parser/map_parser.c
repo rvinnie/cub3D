@@ -9,7 +9,7 @@ int		is_line_checker(char *str)
 	int		first_len;
 	int		second_len;
 
-	if (!(valid_sym = ft_strdup("012NSWE ")))
+	if (!(valid_sym = ft_strdup("01 2NSWE")))
 		return (-1);
 	first_len = ft_strlen(str);
 	second_len = ft_strlen(valid_sym);
@@ -27,7 +27,8 @@ int		is_line_checker(char *str)
 		if (flag != 1)
 			return (0);
 		i++;
-		}
+	}
+	free(valid_sym);
 	return (1);
 }
 
@@ -75,5 +76,5 @@ void	get_map(t_map *s_map, int fd)
 		line = NULL;
 	}
 	ft_lstadd_back(&head, ft_lstnew(line));
-	lst_to_arr(head, s_map);
+	lst_to_arr(head, s_map);  //don't forget free list
 }
