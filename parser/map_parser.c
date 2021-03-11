@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_parser.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvinnie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/11 12:12:07 by rvinnie           #+#    #+#             */
+/*   Updated: 2021/03/11 12:12:11 by rvinnie          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 int		is_line_checker(char *str)
@@ -9,7 +21,7 @@ int		is_line_checker(char *str)
 	int		first_len;
 	int		second_len;
 
-	if (!(valid_sym = ft_strdup("012NSWE")))
+	if (!(valid_sym = ft_strdup("012NSWE ")))
 		return (-1);
 	first_len = ft_strlen(str);
 	second_len = ft_strlen(valid_sym);
@@ -63,15 +75,20 @@ void	get_map(t_map *s_map, int fd)
 	int		count;
 	char	*line;
 	t_list	*head;
+	int		len;
 
 	head = NULL;
 	line = NULL;
+	s_map->map_width = 0;
 	while ((count = get_next_line(fd, &line)))
 	{
 		if (is_line_checker(line) != 1 || check_spaces(line) == 0)
 			continue ;
 		if (count == -1)
 			put_error(s_map, NULL, 3);
+		len = ft_strlen(line);
+		if (len > s_map->map_width)
+			s_map->map_width = len;
 		ft_lstadd_back(&head, ft_lstnew(line));
 		line = NULL;
 	}

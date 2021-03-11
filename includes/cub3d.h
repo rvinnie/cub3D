@@ -28,7 +28,7 @@
 # define FLOOR_COLOR 0x00FFFFFF
 # define PLAYER_COLOR 0x00FF0DD3
 # define SPRITE_COLOR 0x002CA838
-# define PLAYER_STEP 14 // 10
+# define PLAYER_STEP 20 // 10
 # define PXL_SIZE 64 // 64
 # define PLAYER_SIZE 1 // 1
 # define INFINITY_LOOP 1
@@ -94,6 +94,7 @@ typedef struct
 
 typedef struct
 {
+	int				map_width;
 	int				map_height;
 	int				w;
 	int				h;
@@ -140,6 +141,8 @@ void				lst_to_arr(t_list *head, t_map *s_map);
 void				find_player(t_map *s_map);
 t_text				**get_texture(t_map *s_map);
 void				choose_info(t_map *s_map, char **info_arr);
+void				check_path(char *path, t_map *s_map);
+void				map_checker(t_map *s_map);
 
 // Painter functions
 void				pxl_put(t_img *data, int x, int y, int color, int pxl_size);

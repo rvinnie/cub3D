@@ -12,6 +12,25 @@
 
 #include "../includes/cub3d.h"
 
+void	check_path(char *path, t_map *s_map)
+{
+	int	flag;
+
+	flag = 0;
+	while (*path)
+	{
+		if (*path == '.')
+		{
+			path++;
+			if (ft_strncmp(path, "cub", 4) == 0)
+				flag = 1;
+		}
+		path++;
+	}
+	if (flag == 0)
+		put_error(s_map, NULL, 6);
+}
+
 void	parse_line(t_map *s_map, char *line)
 {
 	char	**info_arr;
@@ -53,25 +72,6 @@ void	get_info(t_map *s_map, int fd)
 		|| !s_map->s_parser->sprite || s_map->s_parser->floor_c == 0 ||
 		s_map->s_parser->ceil_c == 0)
 		put_error(s_map, NULL, 5);
-}
-
-void	check_path(char *path, t_map *s_map)
-{
-	int	flag;
-
-	flag = 0;
-	while (*path)
-	{
-		if (*path == '.')
-		{
-			path++;
-			if (ft_strncmp(path, "cub", 4) == 0)
-				flag = 1;
-		}
-		path++;
-	}
-	if (flag == 0)
-		put_error(s_map, NULL, 6);
 }
 
 void	main_parser(char *path, t_map *s_map)

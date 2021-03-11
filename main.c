@@ -33,6 +33,7 @@ int main(int argc, char *argv[])
 		put_error(&s_map, NULL, 1);
 	s_map.mlx = mlx_init();
 	main_parser(argv[1], &s_map);
+	map_checker(&s_map);
 	s_map.win = mlx_new_window(s_map.mlx, s_map.w, s_map.h, "cub3D");
 	// print_arr(s_map.map);
 	// valid_checker

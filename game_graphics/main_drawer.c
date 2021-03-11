@@ -68,23 +68,23 @@ int		click_handler(int keycode, t_map *s_map)
 {
 	// printf("%d\n",keycode);
 
-	if (keycode == 65363) //124 left rotate 65363
+	if (keycode == 124) //124 left rotate 65363
 	{
-		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / 80, -1); // M_PI / (3 * 320)
-		s_map->s_ray->fov_angle = change_degree(s_map->s_ray->fov_angle, M_PI / 80, -1);
+		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / 60, -1); // M_PI / (3 * 320)
+		s_map->s_ray->fov_angle = change_degree(s_map->s_ray->fov_angle, M_PI / 60, -1);
 	}
-	else if (keycode == 65361) //123 right rotate 65361
+	else if (keycode == 123) //123 right rotate 65361
 	{
-		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / 80, 1);
-		s_map->s_ray->fov_angle = change_degree(s_map->s_ray->fov_angle, M_PI / 80, 1);
+		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / 60, 1);
+		s_map->s_ray->fov_angle = change_degree(s_map->s_ray->fov_angle, M_PI / 60, 1);
 	}
-	else if (keycode == 119) // 13 up 119
+	else if (keycode == 13) // 13 up 119
 		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 'f');
-	else if (keycode == 's') // 1 down s
+	else if (keycode == 1) // 1 down s
 		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 'b');
-	else if (keycode == 'd') // 2 right d
+	else if (keycode == 2) // 2 right d
 		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 'r');
-	else if (keycode == 'a') // 0 a
+	else if (keycode == 0) // 0 a
 		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 'l');
 	// map_drawer(s_map->s_img, s_map);
 	// player_drawer(s_map->s_img, s_map->s_player);

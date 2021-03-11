@@ -24,6 +24,7 @@ SRCS		=	main.c \
 				parser/texture_parser.c \
 				parser/info_parser.c \
 				parser/map_parser.c \
+				parser/map_checker.c \
 				game_graphics/painter.c \
 				game_graphics/main_drawer.c \
 				game_graphics/raycasting.c \
@@ -54,12 +55,12 @@ OBJS		=	$(SRCS:.c=.o)
 # %.o:%.c
 # 	$(CC) -Wall -Wextra -Werror -I./includes -Imlx_linux -O3 -c $< -o $@
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L.mlx -lmlx_Linux -lXext -lX11 -lm -lz
+# $(NAME): $(OBJS)
+	# $(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L.mlx -lmlx_Linux -lXext -lX11 -lm -lz
 
 
-# $(NAME):	$(OBJS)
-# 	$(CC) $(CFLAGS) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+$(NAME):	$(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 all:	$(NAME)
 
