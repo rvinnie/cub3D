@@ -41,6 +41,7 @@ SRCS		=	main.c \
 				libft/ft_strncmp.c \
 				libft/ft_atoi.c \
 				libft/ft_isdigit.c \
+				libft/ft_calloc.c \
 				utils/error_handler.c \
 				utils/dir_to_degree.c \
 				utils/rgb_to_hex.c \
@@ -60,7 +61,7 @@ OBJS		=	$(SRCS:.c=.o)
 
 
 $(NAME):	$(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit -O3 -o$(NAME)
 
 all:	$(NAME)
 

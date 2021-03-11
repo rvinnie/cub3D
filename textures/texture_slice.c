@@ -62,7 +62,7 @@ void	fill_space(t_map *s_map, int slice_x, int cur, int max_val, unsigned int co
 	}
 }
 
-void	texture_slice_second(t_map *s_map, int slice_height, int slice_x, double step, int texture_x)
+void	texture_slice_second(t_map *s_map, int slice_height, int slice_x, double step, double texture_x)
 {
 	int				i;
 	unsigned int	color;
@@ -75,20 +75,20 @@ void	texture_slice_second(t_map *s_map, int slice_height, int slice_x, double st
 		start_point = 0;
 	texture_y = (start_point - s_map->h / 2 + slice_height / 2) * step;
 	fill_space(s_map, slice_x, i, start_point, s_map->s_parser->ceil_c);
-	while (i < slice_height && i <= s_map->h)
+	while (i < slice_height && i < s_map->h)
 	{
-		color = *((unsigned int*)s_map->cur_text.addr + ((int)texture_y * s_map->cur_text.width + texture_x));
+		color = *((unsigned int*)s_map->cur_text.addr + ((int)texture_y * s_map->cur_text.width + (int)texture_x));
 		pxl_put(&(s_map->s_img), slice_x, start_point, color, 1);
 		start_point++;
 		texture_y += step;
 		i++;
 	}
-	fill_space(s_map, slice_x, start_point--, s_map->h, 0x00A79390);
+	fill_space(s_map, slice_x, start_point--, s_map->h, s_map->s_parser->floor_c);
 }
 
 void	texture_slice(t_map *s_map, int slice_height, int slice_x, double side_dist)
 {
-	int				texture_x;
+	double			texture_x;
 	double			step;
 
 	s_map->cur_text = choose_texture(s_map);

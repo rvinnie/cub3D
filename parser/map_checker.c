@@ -18,7 +18,7 @@ char	*make_cur_line(char *start_line, int arr_width)
 	int		i;
 	int		len;
 
-	if (!(line = (char *)malloc(sizeof(char) * (arr_width + 3))))
+	if (!(line = (char *)ft_calloc(arr_width + 3, sizeof(char))))
 		return (NULL);
 	len = ft_strlen(start_line);
 	i = 0;
@@ -41,7 +41,7 @@ char	*make_void_line(int arr_width)
 	char	*line;
 	int		i;
 
-	if (!(line = malloc(sizeof(char) * arr_width + 3)))
+	if (!(line = ft_calloc(arr_width + 3, sizeof(char))))
 		return (NULL);
 	arr_width += 2;
 	i = 0;
@@ -60,7 +60,7 @@ char	**rebuild_arr(t_map *s_map, char **start_arr)
 
 	arr_width = s_map->map_width;
 	arr_height = s_map->map_height;
-	if (!(new_arr = (char **)malloc(sizeof(char *) * arr_height + 2)))
+	if (!(new_arr = (char **)ft_calloc(arr_height + 1, sizeof(char *))))
 		put_error(s_map, NULL, 4);
 	j = 0;
 	if (!(new_arr[j++] = make_void_line(arr_width)))
@@ -120,5 +120,5 @@ void	map_checker(t_map *s_map)
 	arr = rebuild_arr(s_map, s_map->map);
 	arr = flood_fill(s_map, arr, x_first, y_first);
 	// print_arr2(s_map, arr);
-	// free_hidden_arr(arr, s_map->map_height);
+	free_hidden_arr(arr, s_map->map_height);
 }

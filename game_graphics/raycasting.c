@@ -31,7 +31,7 @@ void	drawing_walls(t_map *s_map, t_ray *s_ray, int x)
 		side_dist = s_ray->ver_wall_y;
 	}
 	dist_to_wall *= fishbowl_val;
-	if (dist_to_wall == 0)
+	if (dist_to_wall < 0.000001)
 		dist_to_wall = 1;
 	slice_height = (PXL_SIZE / dist_to_wall * (s_map->w / 2) / positive_tan(M_PI / 6));
 	texture_slice(s_map, slice_height, x, side_dist);
