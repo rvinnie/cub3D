@@ -79,7 +79,6 @@ void	main_parser(char *path, t_map *s_map)
 	int		fd;
 
 	// path = "/Users/rvinnie/Desktop/cub_ubuntu/testing/map1.cub";
-
 	check_path(path, s_map);
 	if ((fd = open(path, O_RDONLY)) == -1)
 		put_error(s_map, NULL, 2);

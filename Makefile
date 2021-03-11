@@ -48,8 +48,7 @@ SRCS		=	main.c \
 				utils/trigonometry_funcs.c \
 				utils/check_border.c \
 				utils/lst_to_arr.c \
-				utils/cleaning.c
-				
+				cleaner/free_arr.c
 
 OBJS		=	$(SRCS:.c=.o)
 

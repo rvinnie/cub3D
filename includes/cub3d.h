@@ -14,6 +14,7 @@
 # define CUB3D_H
 # include "get_next_line.h"
 # include "mlx.h"
+# include "../mlx/minilibx_mms_20200219/mlx.h"
 # include "libft.h"
 # include <stdlib.h>
 # include <stdio.h> //
@@ -28,7 +29,7 @@
 # define FLOOR_COLOR 0x00FFFFFF
 # define PLAYER_COLOR 0x00FF0DD3
 # define SPRITE_COLOR 0x002CA838
-# define PLAYER_STEP 20 // 10
+# define PLAYER_STEP 12 // 10
 # define PXL_SIZE 64 // 64
 # define PLAYER_SIZE 1 // 1
 # define INFINITY_LOOP 1
@@ -125,6 +126,9 @@ double				positive_sin(double deg);
 double				positive_cos(double deg);
 double				positive_tan(double deg);
 void				check_border(t_map *s_map, int *y, int *x);
+
+// Cleaner
+void				free_hidden_arr(char **arr, int y);
 void				free_arr(char **arr);
 
 // Moving
@@ -163,4 +167,5 @@ void				texture_slice(t_map *s_map, int slice_height, int slice_x, double side_d
 // Testing functions
 void				print_list(t_list *lst); // FOR TESTING
 void				testing_raycasting(t_map *s_map);
+void				print_arr2(t_map *s_map, char **arr);
 #endif

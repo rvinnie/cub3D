@@ -34,12 +34,11 @@ void	find_player(t_map *s_map)
 		while (s_map->map[i][j])
 		{
 			let = s_map->map[i][j];
-			// printf("%c\n",let);
 			if (find_chr(let, "NSWE"))
 			{
 				is_correct = 1;
 				create_player(s_map, j, i, let);
-				break;
+				break ;
 			}
 			j++;
 		}

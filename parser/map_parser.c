@@ -15,26 +15,23 @@
 int		is_line_checker(char *str)
 {
 	char	*valid_sym;
-	int		i;
+	size_t	i;
 	int		j;
 	int		flag;
-	int		first_len;
 	int		second_len;
 
 	if (!(valid_sym = ft_strdup("012NSWE ")))
 		return (-1);
-	first_len = ft_strlen(str);
 	second_len = ft_strlen(valid_sym);
 	i = 0;
-	while (i < first_len)
-	{	
+	while (i < ft_strlen(str))
+	{
 		j = 0;
 		flag = 0;
 		while (j < second_len)
 		{
-			if (str[i] == valid_sym[j])
+			if (str[i] == valid_sym[j++])
 				flag = 1;
-			j++;
 		}
 		if (flag != 1)
 			return (0);
@@ -46,7 +43,7 @@ int		is_line_checker(char *str)
 
 int		is_map_checker(t_map *s_map, char **str_arr)
 {
-	int 	i;
+	int		i;
 	int		res;
 
 	i = 0;
@@ -58,10 +55,11 @@ int		is_map_checker(t_map *s_map, char **str_arr)
 	return (res);
 }
 
-int check_spaces(char *str)
+int		check_spaces(char *str)
 {
-	int i = 0;
+	int i;
 
+	i = 0;
 	while (str[i])
 	{
 		if (str[i] != ' ')
@@ -70,8 +68,9 @@ int check_spaces(char *str)
 	}
 	return (0);
 }
+
 void	get_map(t_map *s_map, int fd)
-{	
+{
 	int		count;
 	char	*line;
 	t_list	*head;

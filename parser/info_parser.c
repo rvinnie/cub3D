@@ -20,14 +20,14 @@ void	resolution_parser(t_map *s_map, char **info_arr)
 	s_map->h = ft_atoi(info_arr[2]);
 	if (s_map->w == 0 || s_map->h == 0)
 	{
-		s_map->w = 320 * 3;
-		s_map->h = 200 * 3;
+		s_map->w = 2000;
+		s_map->h = 2000;
 	}
-		// mlx_get_screen_size(s_map->mlx, &s_map->w, &s_map->h);
+	// mlx_get_screen_size(s_map->mlx, &s_map->w, &s_map->h);
 }
 
 void	color_parser(t_map *s_map, char **info_arr, char ch)
-{	
+{
 	char	*tmp;
 
 	if (!info_arr[1])

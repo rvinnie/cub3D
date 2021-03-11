@@ -73,6 +73,15 @@ void	print_list(t_list *lst)
 	}
 }
 
+void	print_arr2(t_map *s_map, char **arr)
+{
+	int h = s_map->map_height + 2;
+	int i = 0;
+
+	while (h--)
+		printf("%s\n", arr[i++]);
+}
+
 
 
 // int main()

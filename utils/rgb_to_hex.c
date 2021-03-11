@@ -58,6 +58,12 @@ unsigned long	rgb_to_hex(t_map *s_map, char *rgb)
 	r = ft_atoi(arr_color[0]);
 	g = ft_atoi(arr_color[1]);
 	b = ft_atoi(arr_color[2]);
+	if (r > 256)
+		r = 256;
+	if (g > 256)
+		g = 256;
+	if (b > 256)
+		b = 256;
 	free_arr(arr_color);
 	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
 }

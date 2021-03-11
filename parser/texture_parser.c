@@ -24,6 +24,8 @@ char	*get_filename(t_map *s_map, int count)
 		filename = s_map->s_parser->we;
 	else
 		filename = s_map->s_parser->ea;
+	if (open(filename, O_RDONLY) == -1)
+		put_error(s_map, NULL, 2);
 	return (filename);
 }
 
@@ -48,13 +50,13 @@ t_text	**get_texture(t_map *s_map)
 			free(arr_text[count]);
 			put_error(s_map, NULL, 4);
 		}
-		text_img->img = mlx_xpm_file_to_image(s_map->mlx, get_filename(s_map, count),
-						&arr_text[count]->width, &arr_text[count]->height);
-		text_img->addr = mlx_get_data_addr(text_img->img, &text_img->bit_per_pixel,
-						&text_img->line_len, &text_img->endian);
+		text_img->img = mlx_xpm_file_to_image(s_map->mlx, get_filename(s_map,
+			count), &arr_text[count]->width, &arr_text[count]->height);
+		text_img->addr = mlx_get_data_addr(text_img->img,
+			&text_img->bit_per_pixel, &text_img->line_len, &text_img->endian);
 		arr_text[count]->addr = text_img->addr;
 		free(text_img);
 		count++;
 	}
-	return(arr_text);
+	return (arr_text);
 }

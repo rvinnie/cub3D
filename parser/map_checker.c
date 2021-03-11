@@ -90,25 +90,6 @@ char	**flood_fill(t_map *s_map, char **arr, int cur_x, int cur_y)
 	return (arr);
 }
 
-void	free_hidden_arr(char **arr, int y)
-{
-	int i;
-
-	i = 0;
-	while (y--)
-		free(arr[i++]);
-	free(arr);
-}
-
-void print_arr2(t_map *s_map, char **arr)
-{
-	int h = s_map->map_height + 2;
-	int i = 0;
-
-	while (h--)
-		printf("%s\n", arr[i++]);
-}
-
 void	map_checker(t_map *s_map)
 {
 	char	**arr;

@@ -34,40 +34,48 @@ void	pxl_put(t_img *data, int x, int y, int color, int pxl_size)
 	}
 }
 
-void	map_drawer(t_img s_img, t_map *s_map)
-{
-	int		x;
-	int		y;
-	char	cur_ch;
+// void	map_drawer(t_img s_img, t_map *s_map)
+// {
+// 	int		x;
+// 	int		y;
+// 	char	cur_ch;
 
-	y = 0;
-	while (y < s_map->map_height)
-	{
-		x = 0;
-		while (x < (int)ft_strlen(s_map->map[y]))
-		{
-			cur_ch = s_map->map[y][x];
-			if (cur_ch == '1')
-				pxl_put(&s_img, x * PXL_SIZE, y * PXL_SIZE, WALL_COLOR, PXL_SIZE);
-			else if (cur_ch == '2')
-				pxl_put(&s_img, x * PXL_SIZE, y * PXL_SIZE, SPRITE_COLOR, PXL_SIZE);
-			else if (find_chr(cur_ch, "0NSWE"))
-				pxl_put(&s_img, x * PXL_SIZE, y * PXL_SIZE, FLOOR_COLOR, PXL_SIZE);
-			x++;
-		}
-		y++;
-	}
-}
+// 	y = 0;
+// 	while (y < s_map->map_height)
+// 	{
+// 		x = 0;
+// 		while (x < (int)ft_strlen(s_map->map[y]))
+// 		{
+// 			cur_ch = s_map->map[y][x];
+// 			if (cur_ch == '1')
+// 				pxl_put(&s_img, x * PXL_SIZE, y * PXL_SIZE, WALL_COLOR, PXL_SIZE);
+// 			else if (cur_ch == '2')
+// 				pxl_put(&s_img, x * PXL_SIZE, y * PXL_SIZE, SPRITE_COLOR, PXL_SIZE);
+// 			else if (find_chr(cur_ch, "0NSWE"))
+// 				pxl_put(&s_img, x * PXL_SIZE, y * PXL_SIZE, FLOOR_COLOR, PXL_SIZE);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
 
-void	player_drawer(t_img s_img, t_player s_player)
+// void	player_drawer(t_img s_img, t_player s_player)
+// {
+// 	pxl_put(&s_img, s_player.x_pos, s_player.y_pos, 0x00FF0000, PLAYER_SIZE);
+// }
+
+int		exit_game(t_map *s_map)
 {
-	pxl_put(&s_img, s_player.x_pos, s_player.y_pos, 0x00FF0000, PLAYER_SIZE);
+	exit(1);
+	s_map->h = s_map->h;
 }
 
 int		click_handler(int keycode, t_map *s_map)
 {
 	// printf("%d\n",keycode);
 
+	if (keycode == 53)
+		exit_game(s_map); // don't forget valid exit
 	if (keycode == 124) //124 left rotate 65363
 	{
 		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / 60, -1); // M_PI / (3 * 320)
@@ -104,4 +112,5 @@ void	main_drawer(t_map *s_map)
 	s_map->s_img = s_img;
 	raycasting(s_map, s_map->s_ray);
 	mlx_hook(s_map->win, 2, 1L<<0, click_handler, s_map);
+	mlx_hook(s_map->win, 17, 1L<<0, exit_game, s_map);
 }
