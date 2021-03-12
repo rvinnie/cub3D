@@ -35,17 +35,17 @@ t_text	**get_texture(t_map *s_map)
 	t_img	*text_img;
 	int		count;
 
-	if (!(arr_text = (t_text **)malloc(sizeof(t_text *) * 4)))
+	if (!(arr_text = (t_text **)ft_calloc(4, sizeof(t_text *))))
 		put_error(s_map, NULL, 4);
 	count = 0;
 	while (count < 4)
 	{
-		if (!(arr_text[count] = (t_text *)malloc(sizeof(t_text))))
+		if (!(arr_text[count] = (t_text *)ft_calloc(1, sizeof(t_text))))
 		{
 			free(arr_text);
 			put_error(s_map, NULL, 4);
 		}
-		if (!(text_img = (t_img *)malloc(sizeof(t_img))))
+		if (!(text_img = (t_img *)ft_calloc(1, sizeof(t_img))))
 		{
 			free(arr_text[count]);
 			put_error(s_map, NULL, 4);
@@ -55,6 +55,8 @@ t_text	**get_texture(t_map *s_map)
 		text_img->addr = mlx_get_data_addr(text_img->img,
 			&text_img->bit_per_pixel, &text_img->line_len, &text_img->endian);
 		arr_text[count]->addr = text_img->addr;
+		// arr_text[count]->x_pos = 0;
+		// arr_text[count]->y_pos = 0;
 		free(text_img);
 		count++;
 	}

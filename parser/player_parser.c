@@ -40,6 +40,8 @@ void	find_player(t_map *s_map)
 				create_player(s_map, j, i, let);
 				break ;
 			}
+			if (let == '2')
+				s_map->count_spr++;
 			j++;
 		}
 		i++;

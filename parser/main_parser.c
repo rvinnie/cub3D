@@ -50,7 +50,7 @@ void	get_info(t_map *s_map, int fd)
 	int		count;
 	char	*line;
 
-	if (!(s_map->s_parser = (t_parser *)malloc(sizeof(t_parser))))
+	if (!(s_map->s_parser = (t_parser *)ft_calloc(1, sizeof(t_parser))))
 		put_error(s_map, NULL, 4);
 	s_map->w = 0;
 	s_map->h = 0;
@@ -78,7 +78,7 @@ void	main_parser(char *path, t_map *s_map)
 {
 	int		fd;
 
-	// path = "/Users/rvinnie/Desktop/cub_ubuntu/testing/map1.cub";
+	// path = "/Users/rvinnie/Desktop/cub3d/testing/map2.cub";
 	check_path(path, s_map);
 	if ((fd = open(path, O_RDONLY)) == -1)
 		put_error(s_map, NULL, 2);
@@ -87,7 +87,13 @@ void	main_parser(char *path, t_map *s_map)
 	if ((fd = open(path, O_RDONLY)) == -1)
 		put_error(s_map, NULL, 2);
 	get_map(s_map, fd);
+	s_map->count_spr = 0;
 	find_player(s_map);
+	find_sprites(s_map);
+	// printf("%f\n", s_map->s_spr[0]->x_pos);
+	// printf("%f\n", s_map->s_spr[0]->y_pos);
+	// printf("%f\n", s_map->s_spr[1]->x_pos);
+	// printf("%f\n", s_map->s_spr[1]->y_pos);
 	s_map->s_text = get_texture(s_map);
 	close(fd);
 }

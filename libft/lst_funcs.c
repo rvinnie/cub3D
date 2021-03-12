@@ -16,7 +16,7 @@ t_list	*ft_lstnew(void *content)
 {
 	t_list	*item;
 
-	if (!(item = malloc(sizeof(t_list))))
+	if (!(item = ft_calloc(1, sizeof(t_list))))
 		return (NULL);
 	item->content = content;
 	item->next = NULL;
@@ -73,9 +73,8 @@ void	print_list(t_list *lst)
 	}
 }
 
-void	print_arr2(t_map *s_map, char **arr)
+void	print_arr2(int h, char **arr)
 {
-	int h = s_map->map_height + 2;
 	int i = 0;
 
 	while (h--)

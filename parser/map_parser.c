@@ -55,7 +55,7 @@ int		is_map_checker(t_map *s_map, char **str_arr)
 	return (res);
 }
 
-int		check_spaces(char *str)
+int		check_spaces(t_map *s_map, char *str)
 {
 	int i;
 
@@ -66,7 +66,26 @@ int		check_spaces(char *str)
 			return (1);
 		i++;
 	}
+	put_error(s_map, NULL, 5);
 	return (0);
+}
+
+char	*skip_first(int fd, t_map *s_map)
+{
+	int		count;
+	char	*line;
+
+	while ((count = get_next_line(fd, &line)))
+	{
+		if (count == -1)
+			put_error(s_map, NULL, 3);
+		if (!line[0])
+			continue ;
+		if (is_line_checker(line) == 1)
+			break ;
+		line = NULL;
+	}
+	return (line);
 }
 
 void	get_map(t_map *s_map, int fd)
@@ -79,18 +98,23 @@ void	get_map(t_map *s_map, int fd)
 	head = NULL;
 	line = NULL;
 	s_map->map_width = 0;
+
+	line = skip_first(fd, s_map);
+	
+	ft_lstadd_back(&head, ft_lstnew(line));
 	while ((count = get_next_line(fd, &line)))
 	{
-		if (is_line_checker(line) != 1 || check_spaces(line) == 0)
-			continue ;
 		if (count == -1)
 			put_error(s_map, NULL, 3);
+		if (check_spaces(s_map, line) == 0)
+			continue ;
 		len = ft_strlen(line);
 		if (len > s_map->map_width)
 			s_map->map_width = len;
 		ft_lstadd_back(&head, ft_lstnew(line));
 		line = NULL;
 	}
-	ft_lstadd_back(&head, ft_lstnew(line));
+	if (check_spaces(s_map, line) != 0)
+		ft_lstadd_back(&head, ft_lstnew(line));
 	lst_to_arr(head, s_map);  //don't forget free list
 }

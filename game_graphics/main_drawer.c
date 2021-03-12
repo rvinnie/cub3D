@@ -101,7 +101,7 @@ int		click_handler(int keycode, t_map *s_map)
 	return (1);
 }
 
-void	main_drawer(t_map *s_map)
+void	main_drawer(t_map *s_map, int screenshot)
 {
 	t_img	s_img;
 
@@ -111,6 +111,9 @@ void	main_drawer(t_map *s_map)
 	// player_drawer(s_img, s_map->s_player);
 	s_map->s_img = s_img;
 	raycasting(s_map, s_map->s_ray);
-	mlx_hook(s_map->win, 2, 1L<<0, click_handler, s_map);
-	mlx_hook(s_map->win, 17, 1L<<0, exit_game, s_map);
+	if (!screenshot)
+	{
+		mlx_hook(s_map->win, 2, 1L<<0, click_handler, s_map);
+		mlx_hook(s_map->win, 17, 1L<<0, exit_game, s_map);
+	}
 }

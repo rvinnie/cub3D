@@ -20,8 +20,8 @@ void	resolution_parser(t_map *s_map, char **info_arr)
 	s_map->h = ft_atoi(info_arr[2]);
 	if (s_map->w == 0 || s_map->h == 0)
 	{
-		s_map->w = 2000;
-		s_map->h = 2000;
+		s_map->w = 1920;
+		s_map->h = 1080;
 	}
 	// mlx_get_screen_size(s_map->mlx, &s_map->w, &s_map->h);
 }

@@ -60,7 +60,7 @@ char	**rebuild_arr(t_map *s_map, char **start_arr)
 
 	arr_width = s_map->map_width;
 	arr_height = s_map->map_height;
-	if (!(new_arr = (char **)ft_calloc(arr_height + 1, sizeof(char *))))
+	if (!(new_arr = (char **)ft_calloc(arr_height + 3, sizeof(char *))))
 		put_error(s_map, NULL, 4);
 	j = 0;
 	if (!(new_arr[j++] = make_void_line(arr_width)))
@@ -98,7 +98,9 @@ void	map_checker(t_map *s_map)
 
 	x_first = s_map->s_player.x_pos / 64 + 1;
 	y_first = s_map->s_player.y_pos / 64 + 1;
+	// print_arr2(s_map->map_height, s_map->map);
 	arr = rebuild_arr(s_map, s_map->map);
+	// print_arr2(s_map->map_height + 2, arr);
 	arr = flood_fill(s_map, arr, x_first, y_first);
 	// print_arr2(s_map, arr);
 	free_hidden_arr(arr, s_map->map_height);

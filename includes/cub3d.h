@@ -29,7 +29,7 @@
 # define FLOOR_COLOR 0x00FFFFFF
 # define PLAYER_COLOR 0x00FF0DD3
 # define SPRITE_COLOR 0x002CA838
-# define PLAYER_STEP 12 // 10
+# define PLAYER_STEP 7 // 10
 # define PXL_SIZE 64 // 64
 # define PLAYER_SIZE 1 // 1
 # define INFINITY_LOOP 1
@@ -65,6 +65,12 @@ typedef struct
 	char			*addr;
 	// t_img			s_img;
 }					t_text;
+
+typedef struct
+{
+	double			x_pos;
+	double			y_pos;
+}					t_spr;
 
 typedef struct
 {
@@ -105,6 +111,8 @@ typedef struct
 	t_img			s_img;
 	t_text			**s_text;
 	t_text			cur_text;
+	t_spr			**s_spr;
+	int				count_spr;
 	t_ray			*s_ray;
 	t_player		s_player;
 	t_parser		*s_parser;
@@ -143,6 +151,7 @@ void				main_parser(char *path, t_map *s_map);
 void				get_map(t_map *s_map, int fd);
 void				lst_to_arr(t_list *head, t_map *s_map);
 void				find_player(t_map *s_map);
+void				find_sprites(t_map *s_map);
 t_text				**get_texture(t_map *s_map);
 void				choose_info(t_map *s_map, char **info_arr);
 void				check_path(char *path, t_map *s_map);
@@ -150,8 +159,8 @@ void				map_checker(t_map *s_map);
 
 // Painter functions
 void				pxl_put(t_img *data, int x, int y, int color, int pxl_size);
-void				painter(t_map *s_map);
-void				main_drawer(t_map *s_map);
+void				painter(t_map *s_map, int screen);
+void				main_drawer(t_map *s_map, int screenshot);
 
 // Raycaster functions
 void				raycasting(t_map *s_map, t_ray *s_ray);
@@ -167,5 +176,5 @@ void				texture_slice(t_map *s_map, int slice_height, int slice_x, double side_d
 // Testing functions
 void				print_list(t_list *lst); // FOR TESTING
 void				testing_raycasting(t_map *s_map);
-void				print_arr2(t_map *s_map, char **arr);
+void				print_arr2(int h, char **arr);
 #endif

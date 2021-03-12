@@ -21,6 +21,7 @@ NAME		=	cub3D
 SRCS		=	main.c \
 				parser/main_parser.c \
 				parser/player_parser.c \
+				parser/sprite_parser.c \
 				parser/texture_parser.c \
 				parser/info_parser.c \
 				parser/map_parser.c \

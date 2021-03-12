@@ -19,7 +19,7 @@ char	*create_new_line(char *line)
 	char	*new_line;
 
 	len = ft_strlen(line);
-	if (!(new_line = (char*)malloc(len + 1)))
+	if (!(new_line = (char*)ft_calloc(len + 1, sizeof(char))))
 		return (NULL);
 	i = 0;
 	while (len--)
@@ -43,7 +43,7 @@ void	lst_to_arr(t_list *head, t_map *s_map)
 
 	cur = head;
 	lst_size = ft_lstsize(cur);
-	if (!(s_map->map = (char **)malloc((lst_size + 1) * sizeof(char *))))
+	if (!(s_map->map = (char **)ft_calloc((lst_size + 1), sizeof(char *))))
 		put_error(s_map, NULL, 4);
 	s_map->map_height = lst_size;
 	i = 0;
