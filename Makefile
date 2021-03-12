@@ -31,6 +31,7 @@ SRCS		=	main.c \
 				game_graphics/raycasting.c \
 				game_graphics/draw_line.c \
 				game_graphics/find_walls.c \
+				game_graphics/screenshot.c \
 				textures/texture_slice.c \
 				moving/change_degree.c \
 				moving/make_step.c \
@@ -43,6 +44,7 @@ SRCS		=	main.c \
 				libft/ft_atoi.c \
 				libft/ft_isdigit.c \
 				libft/ft_calloc.c \
+				libft/ft_memset.c \
 				utils/error_handler.c \
 				utils/dir_to_degree.c \
 				utils/rgb_to_hex.c \
@@ -56,12 +58,12 @@ OBJS		=	$(SRCS:.c=.o)
 # %.o:%.c
 # 	$(CC) -Wall -Wextra -Werror -I./includes -Imlx_linux -O3 -c $< -o $@
 
-# $(NAME): $(OBJS)
-	# $(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L.mlx -lmlx_Linux -lXext -lX11 -lm -lz
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L.mlx -lmlx_Linux -lXext -lX11 -lm -lz
 
 
-$(NAME):	$(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit -O3 -o$(NAME)
+# $(NAME):	$(OBJS)
+# 	$(CC) $(CFLAGS) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit -O3 -o$(NAME)
 
 all:	$(NAME)
 

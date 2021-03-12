@@ -20,7 +20,7 @@ void put_error(t_map *s_map, char **arr, int flag)
 	s_map->h = s_map->h; // lol
 	write(2, "Error\n", 7);
 	if (flag == 1)
-		str = "Wrong number of arguments\n";
+		str = "Wrong number of arguments.\n";
 	else if (flag == 2)
 		str = "Unable to open file.\n";
 	else if (flag == 3)
@@ -31,6 +31,8 @@ void put_error(t_map *s_map, char **arr, int flag)
 		str = "Wrong map.\n";
 	else if (flag == 6)
 		str = "Wrong path.\n";
+	else if (flag == 7)
+		str = "Wrong screenshot flag.\n";
 	write(2, str, ft_strlen(str));
 	exit(1);
 }

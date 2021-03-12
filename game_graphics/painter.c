@@ -12,7 +12,7 @@
 
 #include "../includes/cub3d.h"
 
-void	painter(t_map *s_map, int screenshot)
+void	painter(t_map *s_map, int screenshot, char *third_arg)
 {
 	t_ray s_ray;
 
@@ -20,8 +20,12 @@ void	painter(t_map *s_map, int screenshot)
 	s_ray.fov_angle = dir_to_degree(s_map->s_player);
 	s_ray.alpha = change_degree(s_ray.fov_angle, M_PI / 6, 1);
 	main_drawer(s_map, screenshot);
-	if (!screenshot)
-		mlx_loop(s_map->mlx);
+	if (screenshot)
+	{
+		if (!check_third_arg(third_arg))
+			put_error(s_map, NULL, 7);
+		make_screenshot(s_map, s_map->s_img);
+	}
 	else
-		printf("screenshot\n");
+		mlx_loop(s_map->mlx);
 }

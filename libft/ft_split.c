@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "libft.h"
 
 static size_t	ft_splitstrlen(const char *s, char c)
 {

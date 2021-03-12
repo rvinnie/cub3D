@@ -15,7 +15,7 @@
 # include "get_next_line.h"
 # include "mlx.h"
 # include "../mlx/minilibx_mms_20200219/mlx.h"
-# include "libft.h"
+# include "../libft/libft.h"
 # include <stdlib.h>
 # include <stdio.h> //
 # include <string.h>
@@ -126,6 +126,7 @@ int					ft_lstsize(t_list *lst);
 int					find_chr(char ch, char *str);
 
 // Utils functions
+int					exit_game(t_map *s_map);
 void				put_error(t_map *s_map, char **arr, int flag);
 double				dir_to_degree(t_player s_player);
 unsigned long		rgb_to_hex(t_map *s_map, char *rgb);
@@ -159,8 +160,10 @@ void				map_checker(t_map *s_map);
 
 // Painter functions
 void				pxl_put(t_img *data, int x, int y, int color, int pxl_size);
-void				painter(t_map *s_map, int screen);
+void				painter(t_map *s_map, int screenshot, char *third_arg);
 void				main_drawer(t_map *s_map, int screenshot);
+void				make_screenshot(t_map *s_map, t_img s_img);
+int					check_third_arg(char *third_arg);
 
 // Raycaster functions
 void				raycasting(t_map *s_map, t_ray *s_ray);

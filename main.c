@@ -26,7 +26,7 @@ void	print_arr(char **arr)
 
 int main(int argc, char *argv[])
 {
-	t_map s_map;
+	t_map	s_map;
 	int		screenshot;
 	
 	if (argc < 2 || argc > 3)
@@ -40,6 +40,9 @@ int main(int argc, char *argv[])
 	map_checker(&s_map);
 	s_map.win = mlx_new_window(s_map.mlx, s_map.w, s_map.h, "cub3D"); 
 	// valid_checker
-	painter(&s_map, screenshot);
+	if (screenshot)
+		painter(&s_map, screenshot, argv[2]);
+	else
+		painter(&s_map, screenshot, NULL);
 	return (0);
 }
