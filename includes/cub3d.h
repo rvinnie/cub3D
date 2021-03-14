@@ -132,9 +132,10 @@ double				positive_cos(double deg);
 double				positive_tan(double deg);
 void				check_border(t_map *s_map, int *y, int *x);
 
-// Cleaner
+// Exit
 void				free_hidden_arr(char **arr, int y);
 void				free_arr(char **arr);
+int					exit_game(t_map *s_map);
 
 // Moving
 double				change_degree(double degree, double count, int direction);

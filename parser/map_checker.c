@@ -79,7 +79,10 @@ char	**rebuild_arr(t_map *s_map, char **start_arr)
 char	**flood_fill(t_map *s_map, char **arr, int cur_x, int cur_y)
 {
 	if (arr[cur_y][cur_x] == '9')
-		put_error(s_map, NULL, 5); // free (arr);
+	{
+		free_hidden_arr(arr, s_map->map_height);
+		put_error(s_map, NULL, 5);
+	}
 	else if (arr[cur_y][cur_x] == '1' || arr[cur_y][cur_x] == '*')
 		return (arr);
 	arr[cur_y][cur_x] = '*';

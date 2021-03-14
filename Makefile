@@ -51,7 +51,8 @@ SRCS		=	main.c \
 				utils/trigonometry_funcs.c \
 				utils/check_border.c \
 				utils/lst_to_arr.c \
-				cleaner/free_arr.c
+				exit/free_arr.c \
+				exit/exit_game.c
 
 OBJS		=	$(SRCS:.c=.o)
 

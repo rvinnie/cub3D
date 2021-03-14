@@ -34,5 +34,5 @@ void put_error(t_map *s_map, char **arr, int flag)
 	else if (flag == 7)
 		str = "Wrong screenshot flag.\n";
 	write(2, str, ft_strlen(str));
-	exit(1);
+	exit_game(s_map);
 }

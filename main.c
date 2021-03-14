@@ -44,5 +44,6 @@ int main(int argc, char *argv[])
 		painter(&s_map, screenshot, argv[2]);
 	else
 		painter(&s_map, screenshot, NULL);
+	exit_game(&s_map);
 	return (0);
 }

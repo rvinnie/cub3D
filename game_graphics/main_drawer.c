@@ -64,12 +64,6 @@ void	pxl_put(t_img *data, int x, int y, int color, int pxl_size)
 // 	pxl_put(&s_img, s_player.x_pos, s_player.y_pos, 0x00FF0000, PLAYER_SIZE);
 // }
 
-int		exit_game(t_map *s_map)
-{
-	exit(1);
-	s_map->h = s_map->h;
-}
-
 int		click_handler(int keycode, t_map *s_map)
 {
 	// printf("%d\n",keycode);
