@@ -25,11 +25,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 
-# define WALL_COLOR 0x005498BA
-# define FLOOR_COLOR 0x00FFFFFF
-# define PLAYER_COLOR 0x00FF0DD3
-# define SPRITE_COLOR 0x002CA838
-# define PLAYER_STEP 7 // 10
+# define PLAYER_STEP 14 // 10
 # define PXL_SIZE 64 // 64
 # define PLAYER_SIZE 1 // 1
 # define INFINITY_LOOP 1

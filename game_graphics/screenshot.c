@@ -21,6 +21,8 @@ char *put_info(char *buff, int w, int h)
 	buff[3] = size >> 8;
 	buff[4] = size >> 16;
 	buff[5] = size >> 24;
+	buff[10] = 54;
+	buff[14] = 40;
 	buff[18] = w;
 	buff[19] = w >> 8;
 	buff[20] = w >> 16;
@@ -40,13 +42,12 @@ void	put_screenshot(int fd, t_img s_img, int width, int height)
 	int color;
 
 	height--;
-	while (height <= 0)
+	while (height >= 0)
 	{
 		x = 0;
 		while (x < width)
 		{
-			// color = *((int *)s_img.addr + (height * s_img.line_len + width));
-			color = *((int *)s_img.addr + (height * s_img.line_len + x * (s_img.bit_per_pixel / 8)));
+			color = *(int *)(s_img.addr + (height * s_img.line_len + x * (s_img.bit_per_pixel / 8)));
 			write(fd, &color, 3);
 			x++;
 		}
