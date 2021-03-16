@@ -80,7 +80,8 @@ char	**flood_fill(t_map *s_map, char **arr, int cur_x, int cur_y)
 {
 	if (arr[cur_y][cur_x] == '9')
 	{
-		free_hidden_arr(arr, s_map->map_height);
+		free_hidden_arr(arr, s_map->map_height + 2);
+		write(1,"3",1);
 		put_error(s_map, NULL, 5);
 	}
 	else if (arr[cur_y][cur_x] == '1' || arr[cur_y][cur_x] == '*')
@@ -106,5 +107,5 @@ void	map_checker(t_map *s_map)
 	// print_arr2(s_map->map_height + 2, arr);
 	arr = flood_fill(s_map, arr, x_first, y_first);
 	// print_arr2(s_map, arr);
-	free_hidden_arr(arr, s_map->map_height);
+	free_hidden_arr(arr, s_map->map_height + 2);
 }

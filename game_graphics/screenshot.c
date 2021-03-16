@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   screenshot.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvinnie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/15 10:28:42 by rvinnie           #+#    #+#             */
+/*   Updated: 2021/03/15 10:28:46 by rvinnie          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 int		check_third_arg(char *third_arg)
@@ -7,7 +19,7 @@ int		check_third_arg(char *third_arg)
 	return (0);
 }
 
-char *put_info(char *buff, int w, int h)
+char	*put_info(char *buff, int w, int h)
 {
 	int size;
 
@@ -47,7 +59,8 @@ void	put_screenshot(int fd, t_img s_img, int width, int height)
 		x = 0;
 		while (x < width)
 		{
-			color = *(int *)(s_img.addr + (height * s_img.line_len + x * (s_img.bit_per_pixel / 8)));
+			color = *(int *)(s_img.addr + (height * s_img.line_len + x *
+											(s_img.bit_per_pixel / 8)));
 			write(fd, &color, 3);
 			x++;
 		}

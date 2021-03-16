@@ -1,41 +1,55 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprite_parser.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvinnie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/15 12:19:26 by rvinnie           #+#    #+#             */
+/*   Updated: 2021/03/15 12:19:27 by rvinnie          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
-void	create_sprite(t_map *s_map, t_spr **arr_spr, int x, int y, int count)
+t_spr	*create_sprite(int x, int y)
 {
-	t_spr *cur_spr;
+	t_spr	*cur_spr;
 
-	if (!(cur_spr = ft_calloc(1, sizeof(t_spr *))))
-		put_error(s_map, NULL, 4);
-	cur_spr->x_pos = x;
-	cur_spr->y_pos = y;
-	arr_spr[count] = cur_spr;
+	cur_spr = (t_spr *)ft_calloc(1, sizeof(t_spr));
+	cur_spr->x_pos = x * PXL_SIZE + PXL_SIZE / 2;
+	cur_spr->y_pos = y * PXL_SIZE + PXL_SIZE / 2;
+	// arr_spr[count] = cur_spr;
+	return (cur_spr);
 }
 
 void	find_sprites(t_map *s_map)
 {
-	int		i;
-	int		j;
+	int		x;
+	int		y;
 	int		count;
 	char	let;
 	t_spr	**arr_spr;
+	char	**new_arr;
 
-	i = 0;
+	y = 0;
 	count = 0;
 	arr_spr = (t_spr **)ft_calloc(s_map->count_spr, sizeof(t_spr *));
-	while (i < s_map->map_height)
+	new_arr = s_map->map;
+	while (y < s_map->map_height)
 	{
-		j = 0;
-		while (s_map->map[i][j])
+		x = 0;
+		while (new_arr[y][x])
 		{
-			let = s_map->map[i][j];
+			let = new_arr[y][x];
 			if (let == '2')
 			{
-				create_sprite(s_map, arr_spr, j, i, count);
+				arr_spr[count] = create_sprite(x, y);
 				count++;
 			}
-			j++;
+			x++;
 		}
-		i++;
+		y++;
 	}
 	s_map->s_spr = arr_spr;
 }

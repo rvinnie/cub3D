@@ -62,35 +62,22 @@ int		ft_lstsize(t_list *lst)
 	return (count);
 }
 
-// FOR TESTING
-
-void	print_list(t_list *lst)
+void	ft_lstclear(t_list **lst)
 {
-	while (lst)
+	t_list	*cur;
+	t_list	*tmp;
+
+	if (!lst || !*lst)
+		return ;
+	cur = *lst;
+	tmp = cur;
+	while (cur)
 	{
-		printf("%s\n", (char *)lst->content);
-		lst = lst->next;
+		tmp = cur->next;
+		if (cur->content)
+			free(cur->content);
+		free(cur);
+		cur = tmp;
 	}
+	*lst = NULL;
 }
-
-void	print_arr2(int h, char **arr)
-{
-	int i = 0;
-
-	while (h--)
-		printf("%s\n", arr[i++]);
-}
-
-
-
-// int main()
-// {
-// 	// int f = 123;
-// 	char *line = "qwer";
-// 	// char *x;
-// 	t_list *head = NULL;
-// 	ft_lstadd_back(&head, ft_lstnew(line));
-// 	// x = head->content;
-// 	// printf("%s\n", (char*)head->content);
-// 	print_list(head);
-// }

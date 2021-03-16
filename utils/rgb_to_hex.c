@@ -41,9 +41,15 @@ char			**check_color_valid(t_map *s_map, char *rgb)
 	if (!(arr_color = ft_split(rgb, ',')))
 		put_error(s_map, NULL, 4);
 	if (!arr_color[0] || !arr_color[1] || !arr_color[2])
-		put_error(s_map, arr_color, 5);
+	{
+		free_hidden_arr(arr_color, 3);
+		put_error(s_map, NULL, 5);
+	}
 	if (!check_digit(arr_color))
-		put_error(s_map, arr_color, 5);
+	{
+		free_hidden_arr(arr_color, 3);
+		put_error(s_map, NULL, 5);
+	}
 	return (arr_color);
 }
 
@@ -64,6 +70,6 @@ unsigned long	rgb_to_hex(t_map *s_map, char *rgb)
 		g = 256;
 	if (b > 256)
 		b = 256;
-	free_arr(arr_color);
+	free_hidden_arr(arr_color, 3);
 	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
 }

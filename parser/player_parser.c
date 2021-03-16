@@ -14,8 +14,8 @@
 
 void	create_player(t_map *s_map, int x, int y, char dir)
 {
-	s_map->s_player.x_pos = x * PXL_SIZE;
-	s_map->s_player.y_pos = y * PXL_SIZE;
+	s_map->s_player.x_pos = x * PXL_SIZE + PXL_SIZE / 2;
+	s_map->s_player.y_pos = y * PXL_SIZE + PXL_SIZE / 2;
 	s_map->s_player.direction = dir;
 }
 

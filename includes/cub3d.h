@@ -12,8 +12,8 @@
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# include "get_next_line.h"
-# include "mlx.h"
+# include "../gnl/get_next_line.h"
+# include <mlx.h>
 # include "../mlx/minilibx_mms_20200219/mlx.h"
 # include "../libft/libft.h"
 # include <stdlib.h>
@@ -25,7 +25,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 
-# define PLAYER_STEP 14 // 10
+# define PLAYER_STEP 10 // 10
 # define PXL_SIZE 64 // 64
 # define PLAYER_SIZE 1 // 1
 # define INFINITY_LOOP 1
@@ -66,6 +66,7 @@ typedef struct
 {
 	double			x_pos;
 	double			y_pos;
+	double			dist;
 }					t_spr;
 
 typedef struct
@@ -119,10 +120,11 @@ t_list				*ft_lstnew(void *content);
 t_list				*ft_lstlast(t_list *lst);
 void				ft_lstadd_back(t_list **lst, t_list *cur);
 int					ft_lstsize(t_list *lst);
+void				ft_lstclear(t_list **lst);
 int					find_chr(char ch, char *str);
 
 // Utils functions
-int					exit_game(t_map *s_map);
+void				mlx_get_screen_size(int *width, int *height);
 void				put_error(t_map *s_map, char **arr, int flag);
 double				dir_to_degree(t_player s_player);
 unsigned long		rgb_to_hex(t_map *s_map, char *rgb);
@@ -131,6 +133,7 @@ double				positive_sin(double deg);
 double				positive_cos(double deg);
 double				positive_tan(double deg);
 void				check_border(t_map *s_map, int *y, int *x);
+void				bubble_sort(int *arr, int size);
 
 // Exit
 void				free_hidden_arr(char **arr, int y);
@@ -143,6 +146,9 @@ void				make_step(t_map *s_map, double *x_pos, double *y_pos, char side);
 
 //Map valid
 int					is_map_checker(t_map *s_map, char **str_arr);
+int					check_third_arg(char *third_arg);
+void				check_path(char *path, t_map *s_map);
+void				map_checker(t_map *s_map);
 
 // Parser functions
 void				main_parser(char *path, t_map *s_map);
@@ -152,15 +158,14 @@ void				find_player(t_map *s_map);
 void				find_sprites(t_map *s_map);
 t_text				**get_texture(t_map *s_map);
 void				choose_info(t_map *s_map, char **info_arr);
-void				check_path(char *path, t_map *s_map);
-void				map_checker(t_map *s_map);
+
 
 // Painter functions
 void				pxl_put(t_img *data, int x, int y, int color, int pxl_size);
 void				painter(t_map *s_map, int screenshot, char *third_arg);
 void				main_drawer(t_map *s_map, int screenshot);
 void				make_screenshot(t_map *s_map, t_img s_img);
-int					check_third_arg(char *third_arg);
+
 
 // Raycaster functions
 void				raycasting(t_map *s_map, t_ray *s_ray);
@@ -169,6 +174,7 @@ void				find_first_horisontal_wall(t_ray *s_ray, t_player *s_player);
 void				find_horisontal_wall(t_ray *s_ray, t_map *s_map);
 void				find_first_vertical_wall(t_ray *s_ray, t_player *s_player);
 void				find_vertical_wall(t_ray *s_ray, t_map *s_map);
+void				sprite_handler(t_map *s_map, double *dists);
 
 // Textures functions
 void				texture_slice(t_map *s_map, int slice_height, int slice_x, double side_dist);

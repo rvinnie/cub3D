@@ -11,10 +11,6 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-# include <fcntl.h> //open
-# include <sys/types.h> //
-# include <sys/stat.h> //////////////////////////////////////////////////////////////////////
-#include <stdio.h>
 
 int		cleaner(char *tmp, int ret)
 {
@@ -23,8 +19,11 @@ int		cleaner(char *tmp, int ret)
 	return (ret);
 }
 
-int		fill_remainder(char **remainder, char *buf, char *ptr_n)
+int		fill_remainder(char **remainder, char *buf)
 {
+	char *ptr_n;
+	
+	ptr_n = NULL;
 	if ((ptr_n = ft_strchr(buf, '\n')))
 	{
 		*ptr_n = '\0';
@@ -85,7 +84,7 @@ int		read_and_join(int fd, char **remainder, char **line)
 			return (cleaner(buf, -1));
 		}
 		buf[count_byte] = '\0';
-		if ((flag = fill_remainder(remainder, buf, ptr_n)) == -1)
+		if ((flag = fill_remainder(remainder, buf)) == -1)
 			return (cleaner(buf, -1));
 		ptr_n = ft_strjoin(*line, buf);
 		free(*line);
@@ -121,24 +120,3 @@ int		get_next_line(int fd, char **line)
 	remainder = NULL;
 	return (0);
 }
-
-// int main()
-// {
-// 	int fd;
-// 	int count;
-// 	char *line = NULL;
-// 	fd = open("/home/rvinnie/code/21school/projects/cub3D/parser/text.txt", O_RDONLY);
-	
-// 	while ((count = get_next_line(fd, &line)))
-// 	{
-// 		if (count == -1)
-// 			write(1,"!",1);
-// 		printf("%s\n", line);
-// 		free(line);
-// 		line = NULL;
-// 	}
-// 	printf("%s\n", line);
-// 	free(line);
-// 	line = NULL;
-// 	close(fd);
-// }

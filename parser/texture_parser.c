@@ -55,8 +55,6 @@ t_text	**get_texture(t_map *s_map)
 		text_img->addr = mlx_get_data_addr(text_img->img,
 			&text_img->bit_per_pixel, &text_img->line_len, &text_img->endian);
 		arr_text[count]->addr = text_img->addr;
-		// arr_text[count]->x_pos = 0;
-		// arr_text[count]->y_pos = 0;
 		free(text_img);
 		count++;
 	}

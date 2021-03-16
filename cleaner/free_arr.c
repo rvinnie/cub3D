@@ -17,7 +17,7 @@ void	free_hidden_arr(char **arr, int y)
 	int i;
 
 	i = 0;
-	while (y--)
+	while (y-- && arr[i])
 		free(arr[i++]);
 	free(arr);
 }

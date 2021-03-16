@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rvinnie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 10:42:30 by rvinnie           #+#    #+#             */
-/*   Updated: 2021/02/08 10:42:32 by rvinnie          ###   ########.fr       */
+/*   Created: 2020/11/04 12:55:49 by rvinnie           #+#    #+#             */
+/*   Updated: 2020/11/04 12:55:51 by rvinnie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_lstsize(t_list *lst)
-{
-	int count;
+#include "libft.h"
 
-	count = 0;
-	while (lst)
+char	*ft_strdup(const char *s1)
+{
+	char	*ptr;
+	size_t	i;
+
+	i = 0;
+	ptr = NULL;
+	if (!(ptr = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1))))
+		return (NULL);
+	while (s1[i])
 	{
-		count++;
-		lst = lst->next;
+		ptr[i] = s1[i];
+		i++;
 	}
-	return (count);
+	ptr[i] = '\0';
+	return (ptr);
 }

@@ -40,7 +40,6 @@ void	parse_line(t_map *s_map, char *line)
 		free(line);
 		put_error(s_map, NULL, 4);
 	}
-	free(line);
 	choose_info(s_map, info_arr);
 	free_arr(info_arr);
 }
@@ -48,7 +47,7 @@ void	parse_line(t_map *s_map, char *line)
 void	get_info(t_map *s_map, int fd)
 {
 	int		count;
-	char	*line;
+	char	*line = NULL;
 
 	if (!(s_map->s_parser = (t_parser *)ft_calloc(1, sizeof(t_parser))))
 		put_error(s_map, NULL, 4);
@@ -66,7 +65,12 @@ void	get_info(t_map *s_map, int fd)
 		if (count == -1)
 			put_error(s_map, NULL, 3);
 		parse_line(s_map, line);
+		free(line);
+		line = NULL;
 	}
+	parse_line(s_map, line);
+	free(line);
+	line = NULL;
 	if (s_map->w == 0 || s_map->h == 0 || !s_map->s_parser->no ||
 		!s_map->s_parser->so || !s_map->s_parser->ea || !s_map->s_parser->we
 		|| !s_map->s_parser->sprite || s_map->s_parser->floor_c == 0 ||
@@ -89,11 +93,10 @@ void	main_parser(char *path, t_map *s_map)
 	get_map(s_map, fd);
 	s_map->count_spr = 0;
 	find_player(s_map);
-	find_sprites(s_map);
-	// printf("%f\n", s_map->s_spr[0]->x_pos);
-	// printf("%f\n", s_map->s_spr[0]->y_pos);
-	// printf("%f\n", s_map->s_spr[1]->x_pos);
-	// printf("%f\n", s_map->s_spr[1]->y_pos);
+	// ok
+	find_sprites(s_map); // <----
+	// lost
 	s_map->s_text = get_texture(s_map);
+	
 	close(fd);
 }

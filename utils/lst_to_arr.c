@@ -56,5 +56,5 @@ void	lst_to_arr(t_list *head, t_map *s_map)
 		cur = cur->next;
 		i++;
 	}
-	s_map->map[i] = "\0";
+	s_map->map[i] = ft_strdup("\0");
 }

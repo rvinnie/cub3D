@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
 	
 	if (argc < 2 || argc > 3)
 		put_error(&s_map, NULL, 1);
+	s_map.mlx = NULL;
 	s_map.mlx = mlx_init();
 	if (argc == 3)
 		screenshot = 1;

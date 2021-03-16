@@ -14,16 +14,19 @@
 
 void	resolution_parser(t_map *s_map, char **info_arr)
 {
+	int max_w;
+	int max_h;
+
 	if (!info_arr[1] || !info_arr[2] || s_map->w != 0)
 		put_error(s_map, info_arr, 5);
 	s_map->w = ft_atoi(info_arr[1]);
 	s_map->h = ft_atoi(info_arr[2]);
-	if (s_map->w == 0 || s_map->h == 0)
+	mlx_get_screen_size(&max_w, &max_h);
+	if (s_map->w < 32 || s_map->h < 20 || s_map->w > max_w || s_map->h > max_h)
 	{
-		s_map->w = 1920;
-		s_map->h = 1080;
+		s_map->w = max_w;
+		s_map->h = max_h;
 	}
-	// mlx_get_screen_size(s_map->mlx, &s_map->w, &s_map->h);
 }
 
 void	color_parser(t_map *s_map, char **info_arr, char ch)
@@ -36,6 +39,7 @@ void	color_parser(t_map *s_map, char **info_arr, char ch)
 	{
 		if (!(tmp = ft_strdup(info_arr[1])))
 			put_error(s_map, info_arr, 4);
+			
 		s_map->s_parser->floor_c = rgb_to_hex(s_map, tmp);
 		free(tmp);
 	}
@@ -52,8 +56,12 @@ void	color_parser(t_map *s_map, char **info_arr, char ch)
 
 void	image_dir_parser(t_map *s_map, char **info_arr, int dir)
 {
+	// char *tmp;
+	// printf("|||%p\n", info_arr[1]);
+	// tmp = info_arr[1];
 	if (!info_arr[1])
 		put_error(s_map, info_arr, 5);
+	
 	if (dir == 0 && !s_map->s_parser->no)
 	{
 		if (!(s_map->s_parser->no = ft_strdup(info_arr[1])))
@@ -76,6 +84,7 @@ void	image_dir_parser(t_map *s_map, char **info_arr, int dir)
 	}
 	else
 		put_error(s_map, info_arr, 5);
+	// free(tmp);
 }
 
 void	image_spr_parser(t_map *s_map, char **info_arr)
@@ -116,4 +125,5 @@ void	choose_info(t_map *s_map, char **info_arr)
 		if (is_map_checker(s_map, info_arr) != 1)
 			put_error(s_map, info_arr, 5);
 	}
+	// free_arr(info_arr);
 }

@@ -20,8 +20,7 @@ int		is_line_checker(char *str)
 	int		flag;
 	int		second_len;
 
-	if (!(valid_sym = ft_strdup("012NSWE ")))
-		return (-1);
+	valid_sym = "012NSWE ";
 	second_len = ft_strlen(valid_sym);
 	i = 0;
 	while (i < ft_strlen(str))
@@ -37,7 +36,6 @@ int		is_line_checker(char *str)
 			return (0);
 		i++;
 	}
-	free(valid_sym);
 	return (1);
 }
 
@@ -75,14 +73,17 @@ char	*skip_first(int fd, t_map *s_map)
 	int		count;
 	char	*line;
 
+	line = NULL;
 	while ((count = get_next_line(fd, &line)))
 	{
+		// printf("%s\n", line);
 		if (count == -1)
 			put_error(s_map, NULL, 3);
 		if (!line[0])
 			continue ;
 		if (is_line_checker(line) == 1)
 			break ;
+		free(line);
 		line = NULL;
 	}
 	return (line);
@@ -102,6 +103,7 @@ void	get_map(t_map *s_map, int fd)
 	line = skip_first(fd, s_map);
 	
 	ft_lstadd_back(&head, ft_lstnew(line));
+	// printf("%s\n", line);
 	while ((count = get_next_line(fd, &line)))
 	{
 		if (count == -1)
@@ -111,10 +113,15 @@ void	get_map(t_map *s_map, int fd)
 		len = ft_strlen(line);
 		if (len > s_map->map_width)
 			s_map->map_width = len;
+		// printf("%s\n", line);
 		ft_lstadd_back(&head, ft_lstnew(line));
 		line = NULL;
 	}
 	if (check_spaces(s_map, line) != 0)
+	{
+		// printf("%s\n", line);
 		ft_lstadd_back(&head, ft_lstnew(line));
-	lst_to_arr(head, s_map);  //don't forget free list
+	}
+	lst_to_arr(head, s_map);
+	ft_lstclear(&head);
 }

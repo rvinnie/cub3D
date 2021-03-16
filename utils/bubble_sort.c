@@ -1,21 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   bubble_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rvinnie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 10:42:07 by rvinnie           #+#    #+#             */
-/*   Updated: 2021/02/08 10:42:09 by rvinnie          ###   ########.fr       */
+/*   Created: 2021/03/16 11:54:13 by rvinnie           #+#    #+#             */
+/*   Updated: 2021/03/16 11:54:14 by rvinnie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-t_list	*ft_lstnew(void *content)
-{
-	t_list	*item;
+#include "../includes/cub3d.h"
 
-	if (!(item = malloc(sizeof(t_list))))
-		return (NULL);
-	item->content = content;
-	item->next = NULL;
+void	bubble_sort(int *arr, int size)
+{
+	int	i;
+	int	j;
+	int	tmp;
+
+	i = 0;
+	while (i < size - 1)
+	{
+		j = size - 1;
+		while (j > i)
+		{
+			if (arr[j - 1] > arr[j])
+			{
+				tmp = arr[j];
+				arr[j] = arr[j - 1];
+				arr[j - 1] = tmp;
+			}
+			j--;
+
+		}
+		i++;
+	}
 }
