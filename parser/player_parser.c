@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../cub3d.h"
 
 void	create_player(t_map *s_map, int x, int y, char dir)
 {
@@ -40,12 +40,10 @@ void	find_player(t_map *s_map)
 				create_player(s_map, j, i, let);
 				break ;
 			}
-			if (let == '2')
-				s_map->count_spr++;
 			j++;
 		}
 		i++;
 	}
 	if (!is_correct)
-		put_error(s_map, NULL, 5);
+		put_error(s_map, NULL, 5, 1);
 }

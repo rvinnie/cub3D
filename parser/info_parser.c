@@ -10,15 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../cub3d.h"
 
 void	resolution_parser(t_map *s_map, char **info_arr)
 {
 	int max_w;
 	int max_h;
 
-	if (!info_arr[1] || !info_arr[2] || s_map->w != 0)
-		put_error(s_map, info_arr, 5);
+	if (arr_len(info_arr) != 3 || s_map->w != 0 ||
+		!is_line_nbr(info_arr[1]) || !is_line_nbr(info_arr[2]))
+		put_error(s_map, info_arr, 5, 0);
 	s_map->w = ft_atoi(info_arr[1]);
 	s_map->h = ft_atoi(info_arr[2]);
 	mlx_get_screen_size(&max_w, &max_h);
@@ -33,71 +34,65 @@ void	color_parser(t_map *s_map, char **info_arr, char ch)
 {
 	char	*tmp;
 
-	if (!info_arr[1])
-		put_error(s_map, info_arr, 5);
-	if (ch == 'f' && !s_map->s_parser->floor_c)
+	if (arr_len(info_arr) != 2)
+		put_error(s_map, info_arr, 5, 0);
+	if (ch == 'f' && s_map->s_parser->floor_c == -1)
 	{
 		if (!(tmp = ft_strdup(info_arr[1])))
-			put_error(s_map, info_arr, 4);
-			
+			put_error(s_map, info_arr, 4, 0);
 		s_map->s_parser->floor_c = rgb_to_hex(s_map, tmp);
 		free(tmp);
 	}
-	else if (ch == 'c' && !s_map->s_parser->ceil_c)
+	else if (ch == 'c' && s_map->s_parser->ceil_c == -1)
 	{
 		if (!(tmp = ft_strdup(info_arr[1])))
-			put_error(s_map, info_arr, 4);
+			put_error(s_map, info_arr, 4, 0);
 		s_map->s_parser->ceil_c = rgb_to_hex(s_map, tmp);
 		free(tmp);
 	}
 	else
-		put_error(s_map, info_arr, 5);
+		put_error(s_map, info_arr, 5, 0);
 }
 
 void	image_dir_parser(t_map *s_map, char **info_arr, int dir)
 {
-	// char *tmp;
-	// printf("|||%p\n", info_arr[1]);
-	// tmp = info_arr[1];
-	if (!info_arr[1])
-		put_error(s_map, info_arr, 5);
-	
+	if (arr_len(info_arr) != 2)
+		put_error(s_map, info_arr, 5, 0);
 	if (dir == 0 && !s_map->s_parser->no)
 	{
 		if (!(s_map->s_parser->no = ft_strdup(info_arr[1])))
-			put_error(s_map, info_arr, 4);
+			put_error(s_map, info_arr, 4, 0);
 	}
 	else if (dir == 1 && !s_map->s_parser->so)
 	{
 		if (!(s_map->s_parser->so = ft_strdup(info_arr[1])))
-			put_error(s_map, info_arr, 4);
+			put_error(s_map, info_arr, 4, 0);
 	}
 	else if (dir == 2 && !s_map->s_parser->ea)
 	{
 		if (!(s_map->s_parser->ea = ft_strdup(info_arr[1])))
-			put_error(s_map, info_arr, 4);
+			put_error(s_map, info_arr, 4, 0);
 	}
 	else if (dir == 3 && !s_map->s_parser->we)
 	{
 		if (!(s_map->s_parser->we = ft_strdup(info_arr[1])))
-			put_error(s_map, info_arr, 4);
+			put_error(s_map, info_arr, 4, 0);
 	}
 	else
-		put_error(s_map, info_arr, 5);
-	// free(tmp);
+		put_error(s_map, info_arr, 5, 0);
 }
 
 void	image_spr_parser(t_map *s_map, char **info_arr)
 {
-	if (!info_arr[1])
-		put_error(s_map, info_arr, 5);
+	if (arr_len(info_arr) != 2)
+		put_error(s_map, info_arr, 5, 0);
 	if (!s_map->s_parser->sprite)
 	{
 		if (!(s_map->s_parser->sprite = ft_strdup(info_arr[1])))
-			put_error(s_map, info_arr, 4);
+			put_error(s_map, info_arr, 4, 0);
 	}
 	else
-		put_error(s_map, info_arr, 5);
+		put_error(s_map, info_arr, 5, 0);
 }
 
 void	choose_info(t_map *s_map, char **info_arr)
@@ -122,8 +117,7 @@ void	choose_info(t_map *s_map, char **info_arr)
 		color_parser(s_map, info_arr, 'c');
 	else
 	{
-		if (is_map_checker(s_map, info_arr) != 1)
-			put_error(s_map, info_arr, 5);
+		if (is_map_checker(info_arr) != 1)
+			put_error(s_map, info_arr, 5, 0);
 	}
-	// free_arr(info_arr);
 }

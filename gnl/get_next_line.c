@@ -22,7 +22,7 @@ int		cleaner(char *tmp, int ret)
 int		fill_remainder(char **remainder, char *buf)
 {
 	char *ptr_n;
-	
+
 	ptr_n = NULL;
 	if ((ptr_n = ft_strchr(buf, '\n')))
 	{

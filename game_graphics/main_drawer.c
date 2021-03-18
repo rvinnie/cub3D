@@ -10,86 +10,40 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../cub3d.h"
 
-// int     offset = (y * line_length + x * (bits_per_pixel / 8));
-
-void	pxl_put(t_img *data, int x, int y, int color, int pxl_size)
+void	pxl_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
-	int		i;
-	int		j;
 
-	i = 0;
-	while (i < pxl_size)
-	{
-		j = 0;
-		while (j < pxl_size)
-		{
-			dst = data->addr + ((y + i) * data->line_len + (x + j) * (data->bit_per_pixel / 8));
-			*(unsigned int*)dst = color;
-			j++;
-		}
-		i++;
-	}
+	dst = data->addr + (y * data->line_len + x * (data->bit_per_pixel / 8));
+	*(unsigned int*)dst = color;
 }
-
-// void	map_drawer(t_img s_img, t_map *s_map)
-// {
-// 	int		x;
-// 	int		y;
-// 	char	cur_ch;
-
-// 	y = 0;
-// 	while (y < s_map->map_height)
-// 	{
-// 		x = 0;
-// 		while (x < (int)ft_strlen(s_map->map[y]))
-// 		{
-// 			cur_ch = s_map->map[y][x];
-// 			if (cur_ch == '1')
-// 				pxl_put(&s_img, x * PXL_SIZE, y * PXL_SIZE, WALL_COLOR, PXL_SIZE);
-// 			else if (cur_ch == '2')
-// 				pxl_put(&s_img, x * PXL_SIZE, y * PXL_SIZE, SPRITE_COLOR, PXL_SIZE);
-// 			else if (find_chr(cur_ch, "0NSWE"))
-// 				pxl_put(&s_img, x * PXL_SIZE, y * PXL_SIZE, FLOOR_COLOR, PXL_SIZE);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// }
-
-// void	player_drawer(t_img s_img, t_player s_player)
-// {
-// 	pxl_put(&s_img, s_player.x_pos, s_player.y_pos, 0x00FF0000, PLAYER_SIZE);
-// }
 
 int		click_handler(int keycode, t_map *s_map)
 {
-	// printf("%d\n",keycode);
-
-	if (keycode == 53) // 53  65307
-		exit_game(s_map); // don't forget valid exit
-	if (keycode == 124) //124 left rotate 65363
+	if (keycode == 53)
+		exit_game(s_map, 6);
+	if (keycode == 124)
 	{
-		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / 60, -1); // M_PI / (3 * 320)
-		s_map->s_ray->fov_angle = change_degree(s_map->s_ray->fov_angle, M_PI / 60, -1);
+		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / 60, -1);
+		s_map->s_ray->fov_angle =
+			change_degree(s_map->s_ray->fov_angle, M_PI / 60, -1);
 	}
-	else if (keycode == 123) //123 right rotate 65361
+	else if (keycode == 123)
 	{
 		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / 60, 1);
-		s_map->s_ray->fov_angle = change_degree(s_map->s_ray->fov_angle, M_PI / 60, 1);
+		s_map->s_ray->fov_angle =
+			change_degree(s_map->s_ray->fov_angle, M_PI / 60, 1);
 	}
-	else if (keycode == 13) // 13 up 119
+	else if (keycode == 13)
 		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 'f');
-	else if (keycode == 1) // 1 down s
+	else if (keycode == 1)
 		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 'b');
-	else if (keycode == 2) // 2 right d
+	else if (keycode == 2)
 		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 'r');
-	else if (keycode == 0) // 0 a
+	else if (keycode == 0)
 		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 'l');
-	// map_drawer(s_map->s_img, s_map);
-	// player_drawer(s_map->s_img, s_map->s_player);
 	raycasting(s_map, s_map->s_ray);
 	mlx_put_image_to_window(s_map->mlx, s_map->win, s_map->s_img.img, 0, 0);
 	return (1);
@@ -101,15 +55,14 @@ void	main_drawer(t_map *s_map, int screenshot)
 
 	s_img.img = NULL;
 	s_img.img = mlx_new_image(s_map->mlx, s_map->w, s_map->h);
-	s_img.addr = mlx_get_data_addr(s_img.img, &s_img.bit_per_pixel, &s_img.line_len, &s_img.endian);
-	// map_drawer(s_img, s_map);
-	// player_drawer(s_img, s_map->s_player);
+	s_img.addr = mlx_get_data_addr(s_img.img, &s_img.bit_per_pixel,
+									&s_img.line_len, &s_img.endian);
 	s_map->s_img = s_img;
 	raycasting(s_map, s_map->s_ray);
 	mlx_put_image_to_window(s_map->mlx, s_map->win, s_map->s_img.img, 0, 0);
 	if (!screenshot)
 	{
-		mlx_hook(s_map->win, 2, 1L<<0, click_handler, s_map);
-		mlx_hook(s_map->win, 17, 1L<<0, exit_game, s_map);
+		mlx_hook(s_map->win, 2, 1L << 0, click_handler, s_map);
+		mlx_hook(s_map->win, 17, 1L << 0, exit_game, s_map);
 	}
 }

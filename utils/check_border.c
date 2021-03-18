@@ -10,7 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../cub3d.h"
+
+int		is_line_nbr(char *line)
+{
+	int		i;
+	char	let;
+
+	i = 0;
+	while (line[i])
+	{
+		let = line[i];
+		if (let < '0' || let > '9')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int		arr_len(char **info_arr)
+{
+	int count;
+
+	count = 0;
+	while (info_arr[count])
+		count++;
+	return (count);
+}
 
 void	check_border(t_map *s_map, int *y, int *x)
 {

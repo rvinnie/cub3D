@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../cub3d.h"
 
 void	find_first_horisontal_wall(t_ray *s_ray, t_player *s_player)
 {

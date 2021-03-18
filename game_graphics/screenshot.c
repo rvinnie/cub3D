@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../cub3d.h"
 
 int		check_third_arg(char *third_arg)
 {
@@ -77,9 +77,9 @@ void	make_screenshot(t_map *s_map, t_img s_img)
 
 	w = s_map->w;
 	h = s_map->h;
-	fd = open("screenshot.bmp", O_WRONLY | O_TRUNC | O_APPEND | O_CREAT, 0666);
+	fd = open("screenshot.bmp", O_WRONLY | O_APPEND | O_TRUNC | O_CREAT, 0666);
 	write(fd, put_info(buff, w, h), 54);
 	put_screenshot(fd, s_img, w, h);
 	close(fd);
-	exit_game(s_map);
+	exit_game(s_map, 6);
 }

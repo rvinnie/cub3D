@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../cub3d.h"
 
-int	check_wall(t_map *s_map, double x_pos, double y_pos)
+int		check_wall(t_map *s_map, double x_pos, double y_pos)
 {
 	int		check_wall_x;
 	int		check_wall_y;
@@ -22,12 +22,14 @@ int	check_wall(t_map *s_map, double x_pos, double y_pos)
 	check_wall_x = x_pos / PXL_SIZE;
 	check_wall_y = y_pos / PXL_SIZE;
 	check_border(s_map, &check_wall_y, &check_wall_x);
-	if (map[check_wall_y][check_wall_x] == '1')
+	if (map[check_wall_y][check_wall_x] == '1' ||
+		map[check_wall_y][check_wall_x] == '2')
 		return (1);
 	return (0);
 }
 
-void	horizontal_handler(double *x_diff, double *y_diff, double fov_angle, char side)
+void	horizontal_handler(double *x_diff, double *y_diff,
+							double fov_angle, char side)
 {
 	double	diff_angle;
 
@@ -47,7 +49,8 @@ void	horizontal_handler(double *x_diff, double *y_diff, double fov_angle, char s
 		*x_diff *= -1;
 }
 
-void	vertical_handler(double *x_diff, double *y_diff, double fov_angle, char side)
+void	vertical_handler(double *x_diff, double *y_diff,
+						double fov_angle, char side)
 {
 	double	diff_angle;
 
@@ -74,12 +77,11 @@ void	make_step(t_map *s_map, double *x_pos, double *y_pos, char side)
 	double	y_diff;
 
 	fov_angle = s_map->s_ray->fov_angle;
-	if ((fov_angle >= M_PI / 4 && fov_angle < 3 * M_PI / 4) || (fov_angle >= 5 * M_PI / 4 && fov_angle < 7 * M_PI / 4))
+	if ((fov_angle >= M_PI / 4 && fov_angle < 3 * M_PI / 4) ||
+		(fov_angle >= 5 * M_PI / 4 && fov_angle < 7 * M_PI / 4))
 		horizontal_handler(&x_diff, &y_diff, fov_angle, side);
 	else
 		vertical_handler(&x_diff, &y_diff, fov_angle, side);
-	// if (alpha >= M_PI / 2 && alpha <= 3 * M_PI / 2)
-	// 	x_diff *= -1;
 	if (side == 'b')
 	{
 		x_diff *= -1;
@@ -89,8 +91,4 @@ void	make_step(t_map *s_map, double *x_pos, double *y_pos, char side)
 		*x_pos += x_diff;
 	if (!check_wall(s_map, *x_pos, *y_pos + y_diff))
 		*y_pos += y_diff;
-	// printf("%d, %d\n", check_wall_x, check_wall_y);
-	// printf("%c\n", map[(int)*y_pos / PXL_SIZE][check_wall_x]);
-	// *x_pos += x_diff;
-	// *y_pos += y_diff;
 }

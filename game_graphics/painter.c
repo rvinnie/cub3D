@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../cub3d.h"
 
 void	painter(t_map *s_map, int screenshot, char *third_arg)
 {
@@ -23,7 +23,7 @@ void	painter(t_map *s_map, int screenshot, char *third_arg)
 	if (screenshot)
 	{
 		if (!check_third_arg(third_arg))
-			put_error(s_map, NULL, 7);
+			put_error(s_map, NULL, 7, 6);
 		make_screenshot(s_map, s_map->s_img);
 	}
 	else

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../cub3d.h"
 
 char	*get_filename(t_map *s_map, int count)
 {
@@ -25,8 +25,21 @@ char	*get_filename(t_map *s_map, int count)
 	else
 		filename = s_map->s_parser->ea;
 	if (open(filename, O_RDONLY) == -1)
-		put_error(s_map, NULL, 2);
+		put_error(s_map, NULL, 2, 1);
 	return (filename);
+}
+
+t_img	*get_texture2(t_map *s_map, t_text **arr_text, t_text *cur_text)
+{
+	t_img	*text_img;
+
+	if (!(text_img = (t_img *)ft_calloc(1, sizeof(t_img))))
+	{
+		free(cur_text);
+		free(arr_text);
+		put_error(s_map, NULL, 4, 1);
+	}
+	return (text_img);
 }
 
 t_text	**get_texture(t_map *s_map)
@@ -36,20 +49,16 @@ t_text	**get_texture(t_map *s_map)
 	int		count;
 
 	if (!(arr_text = (t_text **)ft_calloc(4, sizeof(t_text *))))
-		put_error(s_map, NULL, 4);
+		put_error(s_map, NULL, 4, 1);
 	count = 0;
 	while (count < 4)
 	{
 		if (!(arr_text[count] = (t_text *)ft_calloc(1, sizeof(t_text))))
 		{
 			free(arr_text);
-			put_error(s_map, NULL, 4);
+			put_error(s_map, NULL, 4, 1);
 		}
-		if (!(text_img = (t_img *)ft_calloc(1, sizeof(t_img))))
-		{
-			free(arr_text[count]);
-			put_error(s_map, NULL, 4);
-		}
+		text_img = get_texture2(s_map, arr_text, arr_text[count]);
 		text_img->img = mlx_xpm_file_to_image(s_map->mlx, get_filename(s_map,
 			count), &arr_text[count]->width, &arr_text[count]->height);
 		text_img->addr = mlx_get_data_addr(text_img->img,
