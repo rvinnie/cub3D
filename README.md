@@ -42,6 +42,7 @@ F - ceiling color in rgb
 0 - space  
 1 - wall  
 2 - sprite  
+E,W,S,N - direction of the player to one of the cardinal points  
 
 ## Control
 Movement - "wasd"  
