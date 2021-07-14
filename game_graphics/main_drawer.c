@@ -22,27 +22,27 @@ void	pxl_put(t_img *data, int x, int y, int color)
 
 int		click_handler(int keycode, t_map *s_map)
 {
-	if (keycode == 53)
+	if (keycode == KEY_ESC)
 		exit_game(s_map, 6);
-	if (keycode == 124)
+	if (keycode == KEY_RIGHT)
 	{
 		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / 60, -1);
 		s_map->s_ray->fov_angle =
 			change_degree(s_map->s_ray->fov_angle, M_PI / 60, -1);
 	}
-	else if (keycode == 123)
+	else if (keycode == KEY_LEFT)
 	{
 		s_map->s_ray->alpha = change_degree(s_map->s_ray->alpha, M_PI / 60, 1);
 		s_map->s_ray->fov_angle =
 			change_degree(s_map->s_ray->fov_angle, M_PI / 60, 1);
 	}
-	else if (keycode == 13)
+	else if (keycode == KEY_W)
 		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 'f');
-	else if (keycode == 1)
+	else if (keycode == KEY_S)
 		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 'b');
-	else if (keycode == 2)
+	else if (keycode == KEY_D)
 		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 'r');
-	else if (keycode == 0)
+	else if (keycode == KEY_A)
 		make_step(s_map, &s_map->s_player.x_pos, &s_map->s_player.y_pos, 'l');
 	raycasting(s_map, s_map->s_ray);
 	mlx_put_image_to_window(s_map->mlx, s_map->win, s_map->s_img.img, 0, 0);

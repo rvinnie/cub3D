@@ -12,7 +12,8 @@
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# include "libft/libft.h"
+
+# include "libft.h"
 # include "gnl/get_next_line.h"
 # include <mlx.h>
 # include <stdlib.h>
@@ -20,9 +21,19 @@
 # include <math.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdio.h>
+
 # define PLAYER_STEP 10
 # define PXL_SIZE 64
 # define INFINITY_LOOP 1
+
+# define KEY_ESC 65307
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
 
 typedef struct			s_list
 {
@@ -121,7 +132,7 @@ void					ft_lstadd_back(t_list **lst, t_list *cur);
 int						ft_lstsize(t_list *lst);
 void					ft_lstclear(t_list **lst);
 int						find_chr(char ch, char *str);
-void					mlx_get_screen_size(int *width, int *height);
+// void					mlx_get_screen_size(int *width, int *height);
 void					put_error(t_map *s_map, char **arr,
 									int flag, int stage);
 double					dir_to_degree(t_player s_player);

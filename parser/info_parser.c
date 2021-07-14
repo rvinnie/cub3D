@@ -22,7 +22,7 @@ void	resolution_parser(t_map *s_map, char **info_arr)
 		put_error(s_map, info_arr, 5, 0);
 	s_map->w = ft_atoi(info_arr[1]);
 	s_map->h = ft_atoi(info_arr[2]);
-	mlx_get_screen_size(&max_w, &max_h);
+	mlx_get_screen_size(s_map->mlx, &max_w, &max_h);
 	if (s_map->w < 32 || s_map->h < 20 || s_map->w > max_w || s_map->h > max_h)
 	{
 		s_map->w = max_w;
