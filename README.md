@@ -2,9 +2,13 @@
 My own mini raycaster that draws a 3D maze based on a map.  
 Сhanging the map you can change textures, sprites, window size, floor and ceiling color and maze shape.  
 ## How to use?
-1) make  
-2.1) ./cub3D path_to_map;  
-2.2) ./cub3D path_to_map [--save] (to save screenshot)   
+1) `make`   
+2.1) `./cub3D path_to_map`  
+2.2) `./cub3D path_to_map --save` (to save screenshot)   
+
+## Control
+Movement - `W A S D`  
+Rotate - `← →`
 
 ## Example map:
 ```
@@ -43,7 +47,3 @@ F - ceiling color in rgb
 1 - wall  
 2 - sprite  
 E,W,S,N - direction of the player to one of the cardinal points  
-
-## Control
-Movement - "wasd"  
-Rotate - "<- ->"  
