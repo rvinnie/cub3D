@@ -16,11 +16,7 @@ RM			=	rm -rf
 
 CFLAGS		=	-Wall -Wextra -Werror
 
-LFLAGS		=	-lXext -lX11 -lm -lz
-
-LIBMLX		=	libs/libmlx.a libs/libft.a
-
-HEADER		=	cub3d.h
+MLXFLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit -O3
 
 NAME		=	cub3D
 
@@ -57,13 +53,17 @@ SRCS		=	main.c \
 				exit/exit_game.c \
 				exit/error_handler.c
 
+LIBFT 		=	libft/libft.a
+
+HDRS		=	cub3d.h
+
 OBJS		=	$(SRCS:.c=.o)
 
-$(NAME):	$(OBJS) $(HEADER)
-	$(CC) $(OBJS) $(LIBMLX) $(LFLAGS) -o $@
-
-%.o: %.c
+%.o:	%.c
 	$(CC) -c $(CFLAGS) $< -o $@
+
+$(NAME):	$(OBJS) $(LIBFT) $(HDRS) Makefile
+	$(CC) $(CFLAGS) $(OBJS) utils/get_screen.m $(MLXFLAGS) $(LIBFT) -o$(NAME)
 
 all:	$(NAME)
 
