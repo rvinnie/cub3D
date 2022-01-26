@@ -1,4 +1,4 @@
-# maze3D (work only on macOS)
+# maze3D (works only on macOS)
 My own mini raycaster that draws a 3D maze based on a map.  
 Сhanging the map you can change textures, sprites, window size, floor and ceiling color and maze shape.  
 ## How to use?
