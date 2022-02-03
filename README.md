@@ -1,7 +1,7 @@
-# maze3D (works only on macOS)
+# maze3D
 My own mini raycaster that draws a 3D maze based on a map.  
 Сhanging the map you can change textures, sprites, window size, floor and ceiling color and maze shape.  
-## How to use?
+## How to use? (works only on macOS)
 1) `make`   
 2.1) `./cub3D path_to_map`  
 2.2) `./cub3D path_to_map --save` (to save screenshot)   
