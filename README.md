@@ -1,16 +1,18 @@
-# maze3D
+# maze3D 
+![platform](https://img.shields.io/badge/platform-macOS-brightgreen--brightgreen)   
 My own mini raycaster that draws a 3D maze based on a map.  
 Сhanging the map you can change textures, sprites, window size, floor and ceiling color and maze shape.  
-## How to use? (works only on macOS)
+### How to use?  
+ 
 1) `make`   
 2.1) `./cub3D path_to_map`  
 2.2) `./cub3D path_to_map --save` (to save screenshot)   
 
-## Control
+### Control
 Movement - `W A S D`  
 Rotate - `← →`
 
-## Example map:
+### Example map:
 ```
 R 1260 800
 
@@ -47,3 +49,9 @@ F - ceiling color in rgb
 1 - wall  
 2 - sprite  
 E,W,S,N - direction of the player to one of the cardinal points  
+### Project demonstration
+Example of project work on basic textures.
+![webserv](https://github.com/rvinnie/maze3D/blob/main/img/wall.jpeg)
+It is also possible to use any textures with the .xmp extension.
+![cats_wall](https://github.com/rvinnie/maze3D/blob/main/img/cats_wall.jpeg)
+![cats_wall2](https://github.com/rvinnie/maze3D/blob/main/img/cats_wall2.jpeg)
